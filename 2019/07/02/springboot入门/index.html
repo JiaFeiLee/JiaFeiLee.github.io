@@ -318,22 +318,27 @@
   
   
   
-  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+
+  
+
+  
+
+  
+  <div id="gitment-ctn"></div> 
+<link rel="stylesheet" href="//imsun.github.io/gitment/style/default.css">
+<script src="//imsun.github.io/gitment/dist/gitment.browser.js"></script>
 <script>
-  var cloudTieConfig = {
-    url: "http://yoursite.com/2019/07/02/springboot入门/", 
-    sourceId: "springboot入门",
-    productKey: "true",
-    target: "cloud-tie-wrapper"
-  };
+var gitment = new Gitment({
+  id: "http://yoursite.com/2019/07/02/springboot入门/",
+  owner: 'JiaFeiLee',
+  repo: 'https://github.com/JiaFeiLee/JiaFeiLee.github.io.git',
+  oauth: {
+    client_id: '51c5c9a5b66ebf689a36',
+    client_secret: '0dcad1ba2cdaf26b0906a54a37e7cef9359eefa6',
+  },
+})
+gitment.render('gitment-ctn')
 </script>
-<script src="//img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
-  
-
-  
-
-  
-
   
 
 
@@ -427,11 +432,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">springboot</a>
+                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
+                <a href="javascript:void(0)" class="js-tag color1">springboot</a>
               </li>
             
             <div class="clearfix"></div>

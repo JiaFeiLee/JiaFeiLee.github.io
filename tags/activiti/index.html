@@ -6,12 +6,12 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Hexo</title>
+  <title>Tag: activiti | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="java springboot">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:url" content="http://yoursite.com/tags/activiti/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="java springboot">
 <meta property="og:locale" content="default">
@@ -159,71 +159,34 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-idea-activiti整合入门" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
+  
     
-      <header class="article-header">
-        
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2019" class="archive-year">2019</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2019/07/04/idea-activiti整合入门/" class="archive-article-date">
+  	<time datetime="2019-07-04T14:25:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-04</time>
+</a>
+        </div>
+    	 
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/04/idea-activiti整合入门/">idea+activiti整合入门</a>
+      <a class="archive-article-title" href="/2019/07/04/idea-activiti整合入门/">idea+activiti整合入门</a>
     </h1>
   
 
-        
-        <a href="/2019/07/04/idea-activiti整合入门/" class="archive-article-date">
-  	<time datetime="2019-07-04T14:25:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一-activiti入门简述"><a href="#一-activiti入门简述" class="headerlink" title="一  activiti入门简述"></a>一  activiti入门简述</h2><p>​        工作流的概念源自于自动办公领域（OA），是针对日常工作中具有固定<a href="http://baike.baidu.com/view/17674.htm" target="_blank" rel="noopener">程序</a>活动而提出的一个概念，工作流是将一组任务组织起来以完成某个经营<a href="http://baike.baidu.com/view/460072.htm" target="_blank" rel="noopener">过程</a>：定义了任务的触发顺序和触发条件，将文档、信息或任务在不同的执行者之间进行传递与执行。每个任务可以由一个或多个<a href="http://baike.baidu.com/view/8343.htm" target="_blank" rel="noopener">软件系统</a>完成，也可以由一个或一组人完成，还可以由一个或多个人与软件系统协作完成。</p>
-<p>​        例如，许多公司采用纸张<a href="http://baike.baidu.com/view/296684.htm" target="_blank" rel="noopener">表单</a>，手工传递的方式，一级一级审批签字，工作效率非常低下，对于统计报表功能则不能实现。而采用工作流软件，使用者只需在电脑上填写有关表单，会按照定义好的流程自动往下跑，下一级审批者将会收到相关资料，并可以根据需要修改、跟踪、管理、查询、统计、打印等，大大提高了效率，实现了知识管理，提升了公司的核心竞争力。</p>
-<p>​        简单来说，工作流是将简单地业务流程化的一种简单工具，有了工作流，能使我们的开发更加便捷。</p>
-<hr>
-<h2 id="二-idea-activiti入门"><a href="#二-idea-activiti入门" class="headerlink" title="二  idea+activiti入门"></a>二  idea+activiti入门</h2><h4 id="1-新建项目"><a href="#1-新建项目" class="headerlink" title="1.新建项目"></a>1.新建项目</h4><p>​          在idea环境中可建立一个maven项目，我这里是springboot，同理。我的具体的pom.xml配置如下：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">"http://maven.apache.org/POM/4.0.0"</span> <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-parent<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.1.6.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">relativePath</span>/&gt;</span> <span class="comment">&lt;!-- lookup parent from repository --&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.example.activiti<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>demo<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>0.0.1-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>demo<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span>Demo project for Spring Boot<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">java.version</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">java.version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.activiti<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>activiti-spring<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.18.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!--JUnit测试--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.12<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!--activiti--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.activiti<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>activiti-engine<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.18.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>slf4j-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.slf4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-beans<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jackson-core-asl<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.codehaus.jackson<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>commons-lang3<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.commons<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>commons-lang3<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.commons<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-jdbc<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis.spring.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.0.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">scope</span>&gt;</span>runtime<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.projectlombok<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lombok<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">optional</span>&gt;</span>true<span class="tag">&lt;/<span class="name">optional</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-test<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="2-activiti配置文件"><a href="#2-activiti配置文件" class="headerlink" title="2.activiti配置文件"></a>2.activiti配置文件</h4><p>​      activiti默认的配置文件名是：activiti.cfg.xml  ,在resource类路径下新建这个xml文件：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"processEngineConfiguration"</span> <span class="attr">class</span>=<span class="string">"org.activiti.engine.impl.cfg.StandaloneProcessEngineConfiguration"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"jdbcDriver"</span> <span class="attr">value</span>=<span class="string">"com.mysql.jdbc.Driver"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"jdbcUrl"</span> <span class="attr">value</span>=<span class="string">"jdbc:mysql://localhost:3306/activiti?serverTimezone=UTC"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"jdbcUsername"</span> <span class="attr">value</span>=<span class="string">"root"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"jdbcPassword"</span> <span class="attr">value</span>=<span class="string">"x5"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"databaseSchemaUpdate"</span> <span class="attr">value</span>=<span class="string">"true"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="3-定义工作流"><a href="#3-定义工作流" class="headerlink" title="3.定义工作流"></a>3.定义工作流</h4><p>​       在resources下建立bpmn文件，首先在建立之前要确定自己的idea安装了actiBPM插件。我在安装插件的过程中发生了一个小插曲，idea提示was not installed: Cannot download。我查找了一下资料，找到了解决方法：打开idea的setting-&gt;Appearance&amp;Behavior-&gt;System Settings-&gt;Updates,再将user secure connection这个按钮前面的沟取消掉。就是不使用安全链接，这样就可以直接下载插件无忧了。</p>
-<p>​      在相关插件安装好后，重启idea，在bpmn文件下开始构建自己需要的工作流图:</p>
-<p>​     <img src="/images/idea-activiti%E6%95%B4%E5%90%88%E5%85%A5%E9%97%A8/%E5%B7%A5%E4%BD%9C%E6%B5%81bpmn%E5%9B%BE.png" alt="工作流bpmn图"></p>
-<p>​       在构建bpmn图的过程中，我开始不知道如何连线，后来才清楚要在每个活动节点的中心引出一条线到另一个活动节点。两个UserTask的属性如下：</p>
-<p>​     <img src="/images/idea-activiti%E6%95%B4%E5%90%88%E5%85%A5%E9%97%A8/property1.png" alt="property1"></p>
-<p>​     <img src="/images/idea-activiti%E6%95%B4%E5%90%88%E5%85%A5%E9%97%A8/property2.png" alt="property1"></p>
-<h4 id="4-bpmn文件导出图片并解决中文乱码问题"><a href="#4-bpmn文件导出图片并解决中文乱码问题" class="headerlink" title="4.bpmn文件导出图片并解决中文乱码问题"></a>4.bpmn文件导出图片并解决中文乱码问题</h4><p>   第一步：将 holiday.bpmn 文件改为扩展名 xml 的文件名称：holiday.xml 修改前的 bpmn 文件</p>
-<p>   第二步：在 holiday.xml 文件上面，点右键并选择 Diagrams 菜单，再选择 Show BPMN2.0 Designer…</p>
-<p>   第三步：点击 Export To File 的小图标</p>
-<p>   第四步：中文乱码的解决</p>
-<p>​           1.打开 IDEA 安装路径，找到如下的安装目录</p>
-<p>​           <img src="/images/idea-activiti%E6%95%B4%E5%90%88%E5%85%A5%E9%97%A8/20190110105940814.png" alt="20190110105940814"></p>
-<p>​           2.根据自己所安装的版本来决定，我使用的是 64 位的 idea，所以在 idea64.exe.vmoptions 文件的最后一行追加一条命令： -Dfile.encoding=UTF-8</p>
-<h4 id="5-对应的测试程序"><a href="#5-对应的测试程序" class="headerlink" title="5.对应的测试程序"></a>5.对应的测试程序</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.activiti.engine.*;</span><br><span class="line"><span class="keyword">import</span> org.activiti.engine.repository.Deployment;</span><br><span class="line"><span class="keyword">import</span> org.activiti.engine.task.Task;</span><br><span class="line"><span class="keyword">import</span> org.junit.Test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ActivitiTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//使用getDefaultProcessEngine()从classpath中加载activiti.cfg.xml文件的对应的流程引擎</span></span><br><span class="line">    ProcessEngine procsssEngine = ProcessEngines.getDefaultProcessEngine() ;</span><br><span class="line"></span><br><span class="line"><span class="comment">//一次执行整个流程</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> </span>&#123; <span class="comment">//以下两种方式选择一种创建引擎方式：1.配置写在程序里 2.读对应的配置文件</span></span><br><span class="line">        <span class="comment">//1</span></span><br><span class="line">        testCreateProcessEngine();</span><br><span class="line">        <span class="comment">//2</span></span><br><span class="line">        testCreateProcessEngineByCfgXml();</span><br><span class="line">        deployProcess();</span><br><span class="line">        startProcess();</span><br><span class="line">        queryTask();</span><br><span class="line">        handleTask();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//方式一</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testCreateProcessEngine</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        ProcessEngineConfiguration cfg = ProcessEngineConfiguration.createStandaloneInMemProcessEngineConfiguration();</span><br><span class="line">        cfg.setJdbcDriver(<span class="string">"com.mysql.jdbc.Driver"</span>);</span><br><span class="line">        cfg.setJdbcUrl(<span class="string">"jdbc:mysql://localhost:3306/activiti?serverTimezone=UTC"</span>);</span><br><span class="line">        cfg.setJdbcUsername(<span class="string">"root"</span>);</span><br><span class="line">        cfg.setJdbcPassword(<span class="string">"x5"</span>);</span><br><span class="line">        <span class="comment">//配置建表策略</span></span><br><span class="line">        cfg.setDatabaseSchemaUpdate(ProcessEngineConfiguration.DB_SCHEMA_UPDATE_TRUE);</span><br><span class="line">        ProcessEngine processEngine = cfg.buildProcessEngine();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//方式二</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testCreateProcessEngineByCfgXml</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        ProcessEngineConfiguration cfg = ProcessEngineConfiguration.createProcessEngineConfigurationFromResource(<span class="string">"activiti.cfg.xml"</span>);</span><br><span class="line">        ProcessEngine engine = cfg.buildProcessEngine();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//发布流程</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">deployProcess</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        RepositoryService repositoryService = procsssEngine.getRepositoryService();</span><br><span class="line">        Deployment deployment = repositoryService.createDeployment()</span><br><span class="line">                .name(<span class="string">"部署"</span>)</span><br><span class="line">                .addClasspathResource(<span class="string">"demo.bpmn"</span>)</span><br><span class="line">                .deploy();</span><br><span class="line">        System.out.println(deployment.getId()+<span class="string">"      "</span>+deployment.getName());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//启动流程</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">startProcess</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        RuntimeService runtimeService = procsssEngine.getRuntimeService();</span><br><span class="line">        runtimeService.startProcessInstanceByKey(<span class="string">"process01"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//查看任务</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">queryTask</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        TaskService taskService = procsssEngine.getTaskService();</span><br><span class="line">        <span class="comment">//执行到何处办理人填什么</span></span><br><span class="line">        String assignee = <span class="string">"小z"</span>;</span><br><span class="line">        List&lt;Task&gt; tasks = taskService.createTaskQuery().taskAssignee(assignee).list();</span><br><span class="line">        <span class="keyword">for</span> (Task task : tasks) &#123;</span><br><span class="line">            System.out.println(<span class="string">"taskId:"</span> + task.getId() + <span class="string">",taskName:"</span> + task.getName() + <span class="string">",assignee:"</span> + task.getAssignee() + <span class="string">",createTime:"</span> + task.getCreateTime());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//办理任务</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleTask</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        TaskService taskService = procsssEngine.getTaskService();</span><br><span class="line">        <span class="comment">//获取当前的任务id并完成它</span></span><br><span class="line">        String taskId = <span class="string">"10002"</span>;</span><br><span class="line">        taskService.complete(taskId);</span><br><span class="line">        System.out.println(<span class="string">"办理成功"</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<p>​     在执行一次后数据库中自动生成的相关表：</p>
-<p>​     <img src="/images/idea-activiti%E6%95%B4%E5%90%88%E5%85%A5%E9%97%A8/tables.png" alt="tables"></p>
-<p>​     一次成功部署后：</p>
-<p><img src="/images/idea-activiti%E6%95%B4%E5%90%88%E5%85%A5%E9%97%A8/deploy.png" alt="deploy"></p>
-<p>​     在开始流程后，查看assignee为小b的任务节点的信息：</p>
-<p>​      <img src="/images/idea-activiti%E6%95%B4%E5%90%88%E5%85%A5%E9%97%A8/query.png" alt="query"></p>
-<p>​     在完成后，数据库中的相关表有进行到第二个任务节点的信息：</p>
-<p>​      <img src="/images/idea-activiti%E6%95%B4%E5%90%88%E5%85%A5%E9%97%A8/task2.png" alt="task2"><br>​     </p>
-<h2 id="三-参考文献"><a href="#三-参考文献" class="headerlink" title="三  参考文献"></a>三  参考文献</h2><p>1.<a href="https://blog.csdn.net/lanjie_gunger/article/details/50799458" target="_blank" rel="noopener">工作流workflow概念</a></p>
-<p>2.<a href="https://blog.csdn.net/qq_15204179/article/details/86219200" target="_blank" rel="noopener">Activiti保存.png 流程图片文件且解决idea中保存图片时显示中文乱码的解决方法</a></p>
-<p>3.<a href="https://www.cnblogs.com/loaderman/p/10130095.html" target="_blank" rel="noopener">使用idea进行activiti工作流开发入门学习</a></p>
-<h2 id="四-关键词"><a href="#四-关键词" class="headerlink" title="四  关键词"></a>四  关键词</h2><p>activiti</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -235,273 +198,19 @@
 		</ul>
 	</div>
 
-      
+          
 
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/04/idea-activiti整合入门/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
+        </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
-    <article id="post-springboot入门" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
+  
+    </div></section>
+  
+
     
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/02/springboot入门/">springboot入门</a>
-    </h1>
-  
-
-        
-        <a href="/2019/07/02/springboot入门/" class="archive-article-date">
-  	<time datetime="2019-07-02T02:12:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一-springbooy简述"><a href="#一-springbooy简述" class="headerlink" title="一  springbooy简述"></a>一  springbooy简述</h2>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">springboot</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/02/springboot入门/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-markdown的格式入门-基础格式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/01/markdown的格式入门-基础格式/">markdown的格式入门-基础格式</a>
-    </h1>
-  
-
-        
-        <a href="/2019/07/01/markdown的格式入门-基础格式/" class="archive-article-date">
-  	<time datetime="2019-07-01T11:41:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一-markdown格式简介"><a href="#一-markdown格式简介" class="headerlink" title="一  markdown格式简介"></a>一  markdown格式简介</h2><p>​        Markdown是一种可以使用普通文本编辑器编写的标记语言，通过简单的标记语法，它可以使普通文本内容具有一定的格式。</p>
-<p>​       Markdown具有一系列衍生版本，用于扩展Markdown的功能（如表格、脚注、内嵌HTML等等），这些功能原初的Markdown尚不具备，它们能让Markdown转换成更多的格式，例如<a href="https://baike.baidu.com/item/LaTeX" target="_blank" rel="noopener">LaTeX</a>，<a href="https://baike.baidu.com/item/Docbook" target="_blank" rel="noopener">Docbook</a>。Markdown增强版中比较有名的有Markdown Extra、MultiMarkdown、 Maruku等。这些衍生版本要么基于工具，如<a href="https://baike.baidu.com/item/Pandoc" target="_blank" rel="noopener">Pandoc</a>；要么基于网站，如<a href="https://baike.baidu.com/item/GitHub" target="_blank" rel="noopener">GitHub</a>和<a href="https://baike.baidu.com/item/Wikipedia" target="_blank" rel="noopener">Wikipedia</a>，在语法上基本兼容，但在一些语法和渲染效果上有改动。</p>
-<hr>
-<h2 id="二-使用指南"><a href="#二-使用指南" class="headerlink" title="二  使用指南"></a>二  使用指南</h2><h4 id="1-标题"><a href="#1-标题" class="headerlink" title="1.标题"></a>1.标题</h4><p>​      标题能显示出文章的结构。行首插入1-6个 # ，每增加一个 # 表示更深入层次的内容，对应到标题的深度由 1-6 阶。</p>
-<p>​      如该标题：属于4级标题</p>
-<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#### 1.标题</span><br></pre></td></tr></table></figure></code></pre><h4 id="2-斜体-amp-粗体"><a href="#2-斜体-amp-粗体" class="headerlink" title="2.斜体&amp;粗体"></a>2.斜体&amp;粗体</h4><p>​     斜体：</p>
-<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*斜体*</span><br></pre></td></tr></table></figure></code></pre><p>​     粗体：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">**粗体**</span><br></pre></td></tr></table></figure>
-
-<h4 id="3-链接"><a href="#3-链接" class="headerlink" title="3.链接"></a>3.链接</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[链接显示的文字](链接的跳转url)</span><br></pre></td></tr></table></figure>
-
-<h4 id="4-上标-amp-下标"><a href="#4-上标-amp-下标" class="headerlink" title="4.上标&amp;下标"></a>4.上标&amp;下标</h4><p>这是<sup>上标</sup></p>
-<p>这是<sub>下标</sub></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;sup&gt;上标&lt;/sup&gt;</span><br><span class="line">&lt;sub&gt;下标&lt;/sub&gt;</span><br></pre></td></tr></table></figure>
-
-<h4 id="5-标记文本"><a href="#5-标记文本" class="headerlink" title="5.标记文本"></a>5.标记文本</h4><p>​     相当于在文档上用信号笔<mark>标记文字</mark></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;mark&gt;标记文字&lt;/mark&gt;</span><br></pre></td></tr></table></figure>
-
-<h4 id="6-下划线-amp-删除线"><a href="#6-下划线-amp-删除线" class="headerlink" title="6.下划线&amp;删除线"></a>6.下划线&amp;删除线</h4><p>这是<u>underline</u>和<del>delete</del></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;u&gt;underline&lt;/u&gt;</span><br><span class="line">&lt;del&gt;delete&lt;/del&gt;</span><br></pre></td></tr></table></figure>
-
-<h4 id="7-无序列表"><a href="#7-无序列表" class="headerlink" title="7.无序列表"></a>7.无序列表</h4><p>​     在第一行列表前添加上*，其余行自动添加</p>
-<ul>
-<li>第一列</li>
-<li>第二列</li>
-<li>第三列</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">* 第一列</span><br><span class="line">* 第二列</span><br><span class="line">* 第三列</span><br></pre></td></tr></table></figure>
-
-<h4 id="8-有序列表"><a href="#8-有序列表" class="headerlink" title="8.有序列表"></a>8.有序列表</h4><p>   在第一行列表前添加上1.，其余行自动添加</p>
-<ol>
-<li>第一列</li>
-<li>第二列</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1. 第一列</span><br><span class="line">2. 第二列</span><br></pre></td></tr></table></figure>
-
-<h4 id="9-引言"><a href="#9-引言" class="headerlink" title="9.引言"></a>9.引言</h4><blockquote>引言</blockquote>
-
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;blockquote&gt;引言&lt;/blockquote&gt;</span><br></pre></td></tr></table></figure>
-
-<h4 id="10-图片-amp-视频"><a href="#10-图片-amp-视频" class="headerlink" title="10.图片&amp;视频"></a>10.图片&amp;视频</h4><p>​      和链接的主要区别在于向最前方添加了一个！</p>
-<p>​      <img src="https://avatars1.githubusercontent.com/u/48512626?s=460&v=4" alt="myImage"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![myImage](https://avatars1.githubusercontent.com/u/48512626?s=460&amp;v=4)</span><br></pre></td></tr></table></figure>
-
-<h4 id="11-横线"><a href="#11-横线" class="headerlink" title="11.横线"></a>11.横线</h4><p>三个减号连在一起可以构成横线的效果</p>
-<hr>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">---</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="三-常用的编辑器"><a href="#三-常用的编辑器" class="headerlink" title="三  常用的编辑器"></a>三  常用的编辑器</h2><p>OSX</p>
-<p>VSCode</p>
-<p>Atom</p>
-<p>Byword</p>
-<p>Mou</p>
-<p>Typora</p>
-<p>MacDown</p>
-<p>RStudio</p>
-<p>​       </p>
-<p>   Linux</p>
-<p>   VSCode</p>
-<p>   Atom</p>
-<p>   Typora</p>
-<p>   ReText</p>
-<p>  UberWriter</p>
-<p>   RStudio</p>
-<p>​    </p>
-<p> Windows</p>
-<p>VSCode</p>
-<p>Atom</p>
-<p>CuteMarkEd</p>
-<p><a href="https://baike.baidu.com/item/MarkdownPad" target="_blank" rel="noopener">MarkdownPad</a>2</p>
-<p>Miu</p>
-<p>Typora</p>
-<p>RStudio</p>
-<p>iOS</p>
-<p><a href="https://baike.baidu.com/item/Byword" target="_blank" rel="noopener">Byword</a></p>
-<p>浏览器插件</p>
-<p>MaDo (Chrome)</p>
-<p>Marxico（Chrome）</p>
-<p>高级应用</p>
-<p>Sublime Text 3 + MarkdownEditing / 教程 [1]  </p>
-<hr>
-<h4 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h4><p>   <a href="https://baike.baidu.com/item/markdown/3245829?fr=aladdin" target="_blank" rel="noopener">百度百科</a></p>
-<hr>
-<h5 id="词条标签"><a href="#词条标签" class="headerlink" title="词条标签"></a>词条标签</h5><p>   互联网</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">markdown</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/01/markdown的格式入门-基础格式/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-  
 
 
           </div>
@@ -523,10 +232,10 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
+		isHome: false,
 		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: true,
 		toc_hide_index: true,

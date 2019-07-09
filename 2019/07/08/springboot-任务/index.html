@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>springboot与任务 | Hexo</title>
+  <title>springboot-任务 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="@EnableAsync​      开启异步注解，标注在开始类上 @ Async异步任务​      在方法上标注，说明这个方法是异步的，可以省去手动的添加多线程代码块，spring自己开一个线程池进行调用。 @ EnableScheduling​     开启定时任务 @ Scheduled 定时任务​     项目开发中经常需要执行一些定时任务，比如需要在每天凌晨时候分析前一天的日志信息，S">
 <meta name="keywords" content="springboot">
 <meta property="og:type" content="article">
-<meta property="og:title" content="springboot与任务">
+<meta property="og:title" content="springboot-任务">
 <meta property="og:url" content="http://yoursite.com/2019/07/08/springboot-任务/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="@EnableAsync​      开启异步注解，标注在开始类上 @ Async异步任务​      在方法上标注，说明这个方法是异步的，可以省去手动的添加多线程代码块，spring自己开一个线程池进行调用。 @ EnableScheduling​     开启定时任务 @ Scheduled 定时任务​     项目开发中经常需要执行一些定时任务，比如需要在每天凌晨时候分析前一天的日志信息，S">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-07-08T08:22:29.030Z">
+<meta property="og:updated_time" content="2019-07-09T07:07:22.985Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="springboot与任务">
+<meta name="twitter:title" content="springboot-任务">
 <meta name="twitter:description" content="@EnableAsync​      开启异步注解，标注在开始类上 @ Async异步任务​      在方法上标注，说明这个方法是异步的，可以省去手动的添加多线程代码块，spring自己开一个线程池进行调用。 @ EnableScheduling​     开启定时任务 @ Scheduled 定时任务​     项目开发中经常需要执行一些定时任务，比如需要在每天凌晨时候分析前一天的日志信息，S">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -166,7 +166,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      springboot与任务
+      springboot-任务
     </h1>
   
 
@@ -197,6 +197,7 @@
 <p>发送复杂的html邮件：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">contextTest2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">//1. 创建一个复杂的消息邮件</span></span><br><span class="line">    MimeMessage mimeMessage = mailSender.createMimeMessage();</span><br><span class="line">    MimeMessageHelper helper = <span class="keyword">new</span> MimeMessageHelper(mimeMessage,<span class="keyword">true</span>);</span><br><span class="line">    helper.setSubject(<span class="string">"邮件标题"</span>);</span><br><span class="line">    helper.setText(<span class="string">"邮件内容"</span>,<span class="keyword">true</span>);<span class="comment">//指定内容是html的内容开启</span></span><br><span class="line">    helper.setTo(<span class="string">"发送对象"</span>);</span><br><span class="line">    helper.setFrom(<span class="string">"来自对象"</span>);</span><br><span class="line">    </span><br><span class="line">    helper.addAttachment(fileName,pathanme);<span class="comment">//添加附件</span></span><br><span class="line">    </span><br><span class="line">    mailSender.send(mimeMessage);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<h2 id="springboot基础操作相关链接"><a href="#springboot基础操作相关链接" class="headerlink" title="springboot基础操作相关链接"></a>springboot基础操作相关链接</h2><p>​       <a href="https://github.com/cuzz1/springboot-learning/blob/master/SpringBoot%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B.md" target="_blank" rel="noopener">springboot入门教程</a></p>
 <p>​     </p>
 
       
@@ -311,7 +312,7 @@
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          springboot与docker
+          springboot-docker
         
       </div>
     </a>
@@ -465,11 +466,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">springboot</a>
+                <a href="javascript:void(0)" class="js-tag color4">RabbitMQ</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">markdown</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">springboot</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="JSR107java Caching定义了5个核心接口：  CachingProvider:创建，配置，获取，管理和控制多个CacheManager CacheManager:创建，配置，获取，管理和控制多个唯一命名的Cache Cache:类似Map数据结构 Entry：是一个存储在Cache中的key-value对 Expiry: 缓存有效期  Spring缓存抽象​    为了简化开发，没有">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-07-08T10:11:30.472Z">
+<meta property="og:updated_time" content="2019-07-09T07:06:44.876Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="springboot-缓存">
 <meta name="twitter:description" content="JSR107java Caching定义了5个核心接口：  CachingProvider:创建，配置，获取，管理和控制多个CacheManager CacheManager:创建，配置，获取，管理和控制多个唯一命名的Cache Cache:类似Map数据结构 Entry：是一个存储在Cache中的key-value对 Expiry: 缓存有效期  Spring缓存抽象​    为了简化开发，没有">
@@ -237,6 +237,43 @@
 <li><p>可以获取和创建ConcurrentMapCache类型的缓存组件 </p>
 </li>
 </ol>
+<h2 id="RedisTemplate"><a href="#RedisTemplate" class="headerlink" title="RedisTemplate"></a>RedisTemplate</h2><ol>
+<li><p>先导入<strong>spring-boot-starter-data-redis</strong>的starter</p>
+</li>
+<li><p>配置redis：<strong>spring.redis.host=主机地址</strong></p>
+</li>
+<li><p>可以在类中注入StringRedisTemplate,   //操作k-v都是字符串</p>
+<p>​                            RedisTemplate             //操作k-v都是对象的</p>
+<p>​        redisTemplate.opsForValue();//操作字符串 </p>
+<p>​        redisTemplate.opsForHash();//操作hash </p>
+<p>​        redisTemplate.opsForList();//操作list </p>
+<p>​        redisTemplate.opsForSet();//操作set </p>
+<p>​        redisTemplate.opsForZSet();//操作有序set </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//给redis中保存对象</span></span><br><span class="line">    stringRedisTemplate.opsForValue().append(<span class="string">"msg"</span>,<span class="string">"hello"</span>); </span><br><span class="line">    String msg = stringRedisTemple.opsForValue.get(<span class="string">"msg"</span>);  <span class="comment">//获取字符串对象</span></span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<pre><code>4. 如果value使用的是自定义类，那么既可以将**类序列化**，又可以**自定义序列化器作为redis的配置类**  ，配置 RedisTemplate&lt;Object,自定义类&gt;bean : [redisTemplate自定义序列化器](https://www.bilibili.com/video/av38657363/?p=83)</code></pre><h2 id="配置CacheManager"><a href="#配置CacheManager" class="headerlink" title="配置CacheManager"></a>配置CacheManager</h2><ul>
+<li><p>引入了redis的starter后容器中保存的是RedisManager</p>
+</li>
+<li><p>RedisCache通过操作redis缓存数据</p>
+</li>
+<li><p>RedisCacheManager配置value自定义序列化,应用之前的RedisTemplate&lt;Object,自定义类&gt;：          <a href="https://www.bilibili.com/video/av38657363/?p=84" target="_blank" rel="noopener">CacheManager配置</a></p>
+</li>
+</ul>
+<ul>
+<li><p>除了使用注解@Cacheable等方式，还可以采取方法内编码的到缓存</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Cache cache = deptCacheManager.getCache(<span class="string">""</span>)   <span class="comment">//从自定义缓存管理器获得Cache</span></span><br><span class="line">cache.put(<span class="string">""</span>,);</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<p>​      </p>
+<p>​    </p>
+<h2 id="springboot基础操作相关链接"><a href="#springboot基础操作相关链接" class="headerlink" title="springboot基础操作相关链接"></a>springboot基础操作相关链接</h2><p>​       <a href="https://github.com/cuzz1/springboot-learning/blob/master/SpringBoot%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B.md" target="_blank" rel="noopener">springboot入门教程</a></p>
 <p>​     </p>
 
       
@@ -351,7 +388,7 @@
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          springboot与任务
+          springboot-任务
         
       </div>
     </a>
@@ -505,11 +542,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">springboot</a>
+                <a href="javascript:void(0)" class="js-tag color4">RabbitMQ</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">markdown</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">springboot</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -159,6 +159,331 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-dubbo" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/14/dubbo/">dubbo</a>
+    </h1>
+  
+
+        
+        <a href="/2019/07/14/dubbo/" class="archive-article-date">
+  	<time datetime="2019-07-14T02:05:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="什么是分布式系统"><a href="#什么是分布式系统" class="headerlink" title="什么是分布式系统"></a>什么是分布式系统</h3><p>​        <strong>分布式系统是若干独立计算机的集合，这些计算机对于用户来说就像单个相关系统</strong>。分布式系统是建立在网络之上的软件系统</p>
+<p>​       <img src="/images/dubbo/1.png" alt="1"></p>
+<p>​       <mark>单一应用架构</mark>：将所有功能放在一个应用里面。缺点：拓展不容易，协同开发不容易，单台服务器压力大。</p>
+<p>​       <mark>垂直应用架构</mark>：将每个小应用（都是每个功能完整的）放在不同的服务器。缺点：界面web与业务逻辑的实现未分离，且应用会有交互。</p>
+<p>​       <mark>分布式服务架构</mark>：业务逻辑和页面放在不同的服务器，<strong>web RPC（远程过程调用）业务</strong>。缺点：访问压力没有实时分配</p>
+<p>​      <mark>流动计算架构</mark>：基于访问压力实时管理集群容量，提高集群利用率。</p>
+<h3 id="RPC基本原理"><a href="#RPC基本原理" class="headerlink" title="RPC基本原理"></a>RPC基本原理</h3><p>​       <img src="/images/dubbo/2.png" alt="2"></p>
+<p>​         <strong>服务提供者（Provider）</strong>：暴露服务的服务提供方，服务提供者在启动时，向注册中心注册自己提供的服务。</p>
+<p>​         <strong>服务消费者（Consumer）</strong>: 调用远程服务的服务消费方，服务消费者在启动时，向注册中心订阅自己所需的服务，服务消费者，从提供者地址列表中，基于软负载均衡算法，选一台提供者进行调用，如果调用失败，再选另一台调用。</p>
+<p>​         <strong>注册中心（Registry）</strong>：注册中心返回服务提供者地址列表给消费者，如果有变更，注册中心将基于长连接推送变更数据给消费者，如zookeeper。</p>
+<p>​         <strong>监控中心（Monitor）</strong>：服务消费者和提供者，在内存中累计调用次数和调用时间，定时每分钟发送一次统计数据到监控中心</p>
+<p>​       两个核心：1. 要建立起通信网络连接</p>
+<p>​                           2. 传输的数据过程中序列化和反序列化</p>
+<p>​       RPC框架：dubbo ,gRPC ,Thrift ,HSF</p>
+<h3 id="dubbo简介"><a href="#dubbo简介" class="headerlink" title="dubbo简介"></a>dubbo简介</h3><p>​       <a href="http://dubbo.apache.org/zh-cn/docs/user/quick-start.html" target="_blank" rel="noopener">官方文档</a></p>
+<p>​        Apache Dubbo (incubating) |ˈdʌbəʊ| 是一款高性能、轻量级的开源Java RPC框架，它提供了三大核心能力：<strong>面向接口的远程方法调用，智能容错和负载均衡，以及服务自动注册和发现。</strong></p>
+<p>​       框架：</p>
+<p>​       <img src="/images/dubbo/3.png" alt="3"></p>
+<p>​      dubbo本身并不是一个服务软件。它其实就是一个<strong>jar包能够帮你的java程序连接到zookeeper，并利用zookeeper消费、提供服务。</strong>所以你不用在Linux上启动什么dubbo服务。</p>
+<p>​      但是为了让用户更好的管理监控众多的dubbo服务，官方提供了一个可视化的监控程序，不过这个监控即使不装也不影响使用。</p>
+<h5 id="dubbo-admin管理控制台"><a href="#dubbo-admin管理控制台" class="headerlink" title="dubbo-admin管理控制台"></a>dubbo-admin管理控制台</h5><p>​       在github中dubbo中的dubbo-ops中下载dubbo-admin的安装包，是一个maven工程，在本地打包成jar包后执行jar包。启动的同时要启动zookeeper</p>
+<h5 id="dubbo-monitor-simple简单的监控中心"><a href="#dubbo-monitor-simple简单的监控中心" class="headerlink" title="dubbo-monitor-simple简单的监控中心"></a>dubbo-monitor-simple简单的监控中心</h5><p>​       在github中dubbo中的dubbo-ops中下载dubbo-monitor-simple的安装包，是一个maven工程，在本地打包成jar包后执行jar包。</p>
+<h3 id="dubbo入门程序"><a href="#dubbo入门程序" class="headerlink" title="dubbo入门程序"></a>dubbo入门程序</h3><p>​        1、分包</p>
+<p>​        建议将服务接口，服务模型，服务异常等均放在 API 包中，因为服务模型及异常也是 API 的一部分，同时，这样做也符合分包原则：重用发布等价原则(REP)，共同重用原则(CRP)。</p>
+<p>如果需要，也可以考虑在 API 包中放置一份 spring 的引用配置，这样使用方，只需在 spring 加载过程中引用此配置即可，配置建议放在模块的包目录下，以免冲突，如：com/alibaba/china/xxx/dubbo-reference.xml。</p>
+<p>​        2、粒度</p>
+<p>​        服务接口尽可能大粒度，每个服务方法应代表一个功能，而不是某功能的一个步骤，否则将面临分布式事务问题，Dubbo 暂未提供分布式事务支持。</p>
+<p>服务接口建议以业务场景为单位划分，并对相近业务做抽象，防止接口数量爆炸。</p>
+<p>不建议使用过于抽象的通用接口，如：Map query(Map)，这样的接口没有明确语义，会给后期维护带来不便。</p>
+<p>​        首先建立三个工程:</p>
+<ol>
+<li><p>gmall-interface：公共接口层（model，service，exception…）</p>
+</li>
+<li><p>gmall-user：用户模块（对用户接口的实现）</p>
+<ol start="3">
+<li><p>gmall-order-web：订单模块（调用用户模块）</p>
+<p>两个 模块调用公共接口层模块的pom配置</p>
+<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependencies&gt;</span><br><span class="line">    &lt;!-- 接口模块依赖的调用 --&gt;</span><br><span class="line">  	&lt;dependency&gt;</span><br><span class="line">  		&lt;groupId&gt;com.atguigu.dubbo&lt;/groupId&gt;</span><br><span class="line">  		&lt;artifactId&gt;gmall-interface&lt;/artifactId&gt;</span><br><span class="line">  		&lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;</span><br><span class="line">  	&lt;/dependency&gt;</span><br><span class="line">  	</span><br><span class="line">  	&lt;!-- 引入dubbo --&gt;</span><br><span class="line">		&lt;dependency&gt;</span><br><span class="line">			&lt;groupId&gt;com.alibaba&lt;/groupId&gt;</span><br><span class="line">			&lt;artifactId&gt;dubbo&lt;/artifactId&gt;</span><br><span class="line">			&lt;version&gt;2.6.2&lt;/version&gt;</span><br><span class="line">		&lt;/dependency&gt;</span><br><span class="line">	&lt;!-- 由于我们使用zookeeper作为注册中心，所以需要操作zookeeper</span><br><span class="line">dubbo 2.6以前的版本引入zkclient操作zookeeper </span><br><span class="line">dubbo 2.6及以后的版本引入curator操作zookeeper</span><br><span class="line">下面两个zk客户端根据dubbo版本2选1即可</span><br><span class="line">--&gt;</span><br><span class="line">		&lt;dependency&gt;</span><br><span class="line">			&lt;groupId&gt;com.101tec&lt;/groupId&gt;</span><br><span class="line">			&lt;artifactId&gt;zkclient&lt;/artifactId&gt;</span><br><span class="line">			&lt;version&gt;0.10&lt;/version&gt;</span><br><span class="line">		&lt;/dependency&gt;</span><br><span class="line">		&lt;!-- curator-framework --&gt;</span><br><span class="line">		&lt;dependency&gt;</span><br><span class="line">			&lt;groupId&gt;org.apache.curator&lt;/groupId&gt;</span><br><span class="line">			&lt;artifactId&gt;curator-framework&lt;/artifactId&gt;</span><br><span class="line">			&lt;version&gt;2.12.0&lt;/version&gt;</span><br><span class="line">		&lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line"> &lt;/dependencies&gt;</span><br></pre></td></tr></table></figure></code></pre></li>
+</ol>
+<p><strong>提供者配置文件</strong>，具体操作可参考官方文档：</p>
+</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--当前应用的名字  --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">dubbo:application</span> <span class="attr">name</span>=<span class="string">"gmall-user"</span>&gt;</span><span class="tag">&lt;/<span class="name">dubbo:application</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!--指定注册中心的地址，这里使用的是zookeeper，也可以使用其它  --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dubbo:registry</span> <span class="attr">address</span>=<span class="string">"zookeeper://118.24.44.169:2181"</span> /&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--使用dubbo协议，将服务暴露在20880端口  --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dubbo:protocol</span> <span class="attr">name</span>=<span class="string">"dubbo"</span> <span class="attr">port</span>=<span class="string">"20880"</span> /&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 指定需要暴露的服务，ref引用服务的实现--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dubbo:service</span> <span class="attr">interface</span>=<span class="string">"com.atguigu.gmall.service.UserService"</span> <span class="attr">ref</span>=<span class="string">"userServiceImpl"</span> /&gt;</span> </span><br><span class="line">    <span class="comment">&lt;!-- 监控中心协议，如果为protocol="registry"，表示从注册中心发现监控中心地址，否则直连监控中心 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">dubbo:monitor</span> <span class="attr">protocol</span>=<span class="string">"registry"</span>&gt;</span><span class="tag">&lt;/<span class="name">dubbo:monitor</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>消费者配置文件</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 应用名 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">dubbo:application</span> <span class="attr">name</span>=<span class="string">"gmall-order-web"</span>&gt;</span><span class="tag">&lt;/<span class="name">dubbo:application</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- 指定注册中心地址 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">dubbo:registry</span> <span class="attr">address</span>=<span class="string">"zookeeper://118.24.44.169:2181"</span> /&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- 生成远程服务代理，可以和本地bean一样使用demoService --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">dubbo:reference</span> <span class="attr">id</span>=<span class="string">"userService"</span> <span class="attr">interface</span>=<span class="string">"com.atguigu.gmall.service.UserService"</span>&gt;</span><span class="tag">&lt;/<span class="name">dubbo:reference</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 监控中心协议，如果为protocol="registry"，表示从注册中心发现监控中心地址，否则直连监控中心 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">dubbo:monitor</span> <span class="attr">protocol</span>=<span class="string">"registry"</span>&gt;</span><span class="tag">&lt;/<span class="name">dubbo:monitor</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="dubbo配置"><a href="#dubbo配置" class="headerlink" title="dubbo配置"></a>dubbo配置</h3><ol>
+<li><p><strong>配置原则</strong></p>
+<p>JVM 启动 -D 参数优先，这样可以使用户在部署和启动时进行参数重写，比如在启动时需改变协议的端口。</p>
+<p>XML 次之，如果在 XML 中有配置，则 dubbo.properties 中的相应配置项无效。</p>
+<p>Properties 最后，相当于缺省值，只有 XML 没有配置时，dubbo.properties 的相应配置项才会生效，通常用于共享公共配置，比如应用名。</p>
+</li>
+<li><p><strong>重试次数</strong></p>
+<p><mark>失败自动切换，当出现失败，重试其它服务器，但重试会带来更长延迟。</mark>可通过 retries=”2” 来设置重试次数(不含第一次)。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">重试次数配置如下：</span><br><span class="line"><span class="tag">&lt;<span class="name">dubbo:service</span> <span class="attr">retries</span>=<span class="string">"2"</span> /&gt;</span></span><br><span class="line">或</span><br><span class="line"><span class="tag">&lt;<span class="name">dubbo:reference</span> <span class="attr">retries</span>=<span class="string">"2"</span> /&gt;</span></span><br><span class="line">或</span><br><span class="line"><span class="tag">&lt;<span class="name">dubbo:reference</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dubbo:method</span> <span class="attr">name</span>=<span class="string">"findFoo"</span> <span class="attr">retries</span>=<span class="string">"2"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dubbo:reference</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>超时时间</strong></p>
+<p>​        由于网络或服务端不可靠，会导致调用出现一种不确定的中间状态（超时）。为了避免超时导致客户端资源（线程）挂起耗尽，必须设置超时时间。</p>
+<ol>
+<li><p>消费端</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">全局超时配置</span><br><span class="line"><span class="tag">&lt;<span class="name">dubbo:consumer</span> <span class="attr">timeout</span>=<span class="string">"5000"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">指定接口以及特定方法超时配置</span><br><span class="line"><span class="tag">&lt;<span class="name">dubbo:reference</span> <span class="attr">interface</span>=<span class="string">"com.foo.BarService"</span> <span class="attr">timeout</span>=<span class="string">"2000"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dubbo:method</span> <span class="attr">name</span>=<span class="string">"sayHello"</span> <span class="attr">timeout</span>=<span class="string">"3000"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dubbo:reference</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+</li>
+</ol>
+<pre><code>2. 服务端
+
+   <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">全局超时配置</span><br><span class="line"><span class="tag">&lt;<span class="name">dubbo:provider</span> <span class="attr">timeout</span>=<span class="string">"5000"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">指定接口以及特定方法超时配置</span><br><span class="line"><span class="tag">&lt;<span class="name">dubbo:provider</span> <span class="attr">interface</span>=<span class="string">"com.foo.BarService"</span> <span class="attr">timeout</span>=<span class="string">"2000"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dubbo:method</span> <span class="attr">name</span>=<span class="string">"sayHello"</span> <span class="attr">timeout</span>=<span class="string">"3000"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dubbo:provider</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+3. 配置原则
+
+   dubbo推荐在Provider上尽量多配置Consumer端属性：
+
+   ​       1、作服务的提供者，比服务使用方更清楚服务性能参数，如调用的超时时间，合理的重试次数，等等
+
+   ​       2、在配置后，不配置则会使用的配置值，即配置可以作为的缺省值。否则，会使用端的全局设置，这对于不可控的，并且往往是不合理的
+
+   1) 方法级配置别优于接口级别，即小Scope优先 
+
+   2) Consumer端配置 优于 Provider配置 优于 全局配置，
+
+   3) 最后是Dubbo Hard Code的配置值（见配置文档）</code></pre><ol start="4">
+<li><strong>版本号</strong></li>
+</ol>
+<p>​           当一个接口实现，出现不兼容升级时，可以用版本号过渡，版本号不同的服务相互间不引用。</p>
+<p>可以按照以下的步骤进行版本迁移：</p>
+<p>​            在低压力时间段，先升级一半提供者为新版本</p>
+<p>​            再将所有消费者升级为新版本</p>
+<p>​            然后将剩下的一半提供者升级为新版本</p>
+<h3 id="高可用"><a href="#高可用" class="headerlink" title="高可用"></a>高可用</h3><ol>
+<li><p><strong>zookeeper宕机与dubbo直连</strong></p>
+<p>现象：zookeeper注册中心宕机，还可以消费dubbo暴露的服务。</p>
+<p>l  监控中心宕掉不影响使用，只是丢失部分采样数据</p>
+<p>l  数据库宕掉后，注册中心仍能通过缓存提供服务列表查询，但不能注册新服务</p>
+<p>l  注册中心对等集群，任意一台宕掉后，将自动切换到另一台</p>
+<p>l  <mark><strong>注册中心全部宕掉后，服务提供者和服务消费者仍能通过本地缓存通讯</strong></mark></p>
+<p>l  服务提供者无状态，任意一台宕掉后，不影响使用</p>
+<p>l  服务提供者全部宕掉后，服务消费者应用将无法使用，并无限次重连等待服务提供者恢复</p>
+</li>
+<li><p><strong>集群下dubbo负债均衡配置</strong></p>
+<p><strong>Random LoadBalance</strong></p>
+<p>随机，按权重设置随机概率。</p>
+<p>在一个截面上碰撞的概率高，但调用量越大分布越均匀，而且按概率使用权重后也比较均匀，有利于动态调整提供者权重。</p>
+<p><strong>RoundRobin LoadBalance</strong></p>
+<p>轮循，按公约后的权重设置轮循比率。</p>
+<p>存在慢的提供者累积请求的问题，比如：第二台机器很慢，但没挂，当请求调到第二台时就卡在那，久而久之，所有请求都卡在调到第二台上。</p>
+<p><strong>LeastActive LoadBalance</strong></p>
+<p>最少活跃调用数，相同活跃数的随机，活跃数指调用前后计数差。</p>
+<p>使慢的提供者收到更少请求，因为越慢的提供者的调用前后计数差会越大。</p>
+<p><strong>ConsistentHash LoadBalance</strong></p>
+<p>一致性 Hash，相同参数的请求总是发到同一提供者。</p>
+<p>当某一台提供者挂时，原本发往该提供者的请求，基于虚拟节点，平摊到其它提供者，不会引起剧烈变动。算法参见：<a href="http://en.wikipedia.org/wiki/Consistent_hashing" target="_blank" rel="noopener">http://en.wikipedia.org/wiki/Consistent_hashing</a></p>
+<p>缺省只对第一个参数 Hash，如果要修改，请配置 &lt;dubbo:parameter key=”hash.arguments” value=”0,1” /&gt;</p>
+<p>缺省用 160  &lt;dubbo:parameter key=”hash.nodes” value=”320” /&gt;</p>
+</li>
+<li><p><strong>整合hystrix，服务熔断与降级处理</strong></p>
+</li>
+</ol>
+<p>​         1. <strong>服务降级</strong></p>
+<p>​         什么是服务降级？</p>
+<p>​        当服务器压力剧增的情况下，根据实际业务情况及流量，对<strong>一些服务和页面有策略的不处理或换种简单的方式处理，</strong>从而释放服务器资源以保证核心交易正常运作或高效运作。</p>
+<p>​         2. <strong>集群容错</strong></p>
+<p>​         <strong>Failover Cluster</strong></p>
+<p>失败自动切换，当出现失败，重试其它服务器。通常用于读操作，但重试会带来更长延迟。可通过 retries=”2” 来设置重试次数(不含第一次)。</p>
+<p>​         …..</p>
+<p>​         3. <strong>整合hystrix</strong></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">dubbo</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/07/14/dubbo/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-spring-检索" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/12/spring-检索/">spring-检索</a>
+    </h1>
+  
+
+        
+        <a href="/2019/07/12/spring-检索/" class="archive-article-date">
+  	<time datetime="2019-07-12T07:35:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="检索"><a href="#检索" class="headerlink" title="检索"></a>检索</h3><p>​        我们的应用经常需要添加检索功能，开源的 ElasticSearch 是目前全文搜索引擎的 首选。他可以快速的存储、搜索和分析海量数据。Spring Boot通过整合Spring Data ElasticSearch为我们提供了非常便捷的检索功能支持</p>
+<p>​        Elasticsearch是一个分布式搜索服务，提供Restful API，底层基于Lucene，采用 多shard（分片）的方式保证数据安全，并且提供自动resharding的功能，github 等大型的站点也是采用了ElasticSearch作为其搜索服务，</p>
+<h3 id="下载elasticsearch镜像并运行"><a href="#下载elasticsearch镜像并运行" class="headerlink" title="下载elasticsearch镜像并运行"></a>下载elasticsearch镜像并运行</h3><p>​         <img src="/images/1.png" alt="1"></p>
+<p>​        elasticsearch运行时要限制堆内存，9300端口是分布式各个节点的端口</p>
+<p>​        中间报错，<a href="https://blog.csdn.net/yjk13703623757/article/details/68939183" target="_blank" rel="noopener">Docker报错 WARNING: IPv4 forwarding is disabled. Networking will not work.</a></p>
+<p>​         最后能够成功访问。</p>
+<h3 id="elasticsearch快速入门"><a href="#elasticsearch快速入门" class="headerlink" title="elasticsearch快速入门"></a>elasticsearch快速入门</h3><p>• 以员工文档 的形式存储为例：一个文档代表一个员工数据。存储数据到 ElasticSearch 的行为叫做 索引 ，但在索引一个文档之前，需要确定将文档存 储在哪里。 </p>
+<p>• 一个 ElasticSearch 集群可以 包含多个 索引 ，相应的每个索引可以包含多 个 类型 。 这些不同的类型存储着多个 文档 ，每个文档又有 多个 属性 。 </p>
+<p>• 类似关系： <mark><strong>– 索引-数据库 – 类型-表 – 文档-表中的记录 – 属性-列</strong></mark></p>
+<p>可以表示为下列图：</p>
+<p><img src="/images/2.png" alt="2"></p>
+<p><strong>使用put带json数据的请求发送到elasticsearch可以实现文档的存储</strong></p>
+<p><img src="/images/3.png" alt="3"></p>
+<p><strong>接下来就能够get请求搜索到相应的内容</strong></p>
+<p><img src="/images/4.png" alt="4"></p>
+<p><strong>delete请求是删除数据，head是检查是否有数据</strong></p>
+<p>搜索所有员工: 请求最后改写_search</p>
+<p>结合官方文档 ，json中可以指定查询规则</p>
+<p><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/getting-started.html" target="_blank" rel="noopener">elastic基础入门</a></p>
+<h3 id="springboot整合je"><a href="#springboot整合je" class="headerlink" title="springboot整合je"></a>springboot整合je</h3><p>​    默认不生效，需要导入jest的工具包，</p>
+<ol>
+<li><p>首先注释pom文件中的spring-boot-starter-data-elasticsearch</p>
+</li>
+<li><p>从maven repository搜索jest导入依赖到pom</p>
+</li>
+<li><p>搜索jest自动配置类可以找到在配置文件中需要配置spring.elasticsearch.jest.uris=http://+ip加上端口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line">JestClient jestClient  <span class="comment">//配置好的可以直接注入JestClient</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">contextLoads</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">//给Es中索引（保存）一个文档</span></span><br><span class="line">    Aticle aricle = <span class="keyword">new</span> Aticle();</span><br><span class="line">    aticle.setId(<span class="number">1</span>);</span><br><span class="line">    aticle.setTitle(<span class="string">"good news"</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//构建一个索引</span></span><br><span class="line">    Index index = <span class="keyword">new</span>        				    Index.Builder(article).index(<span class="string">"hubu"</span>).type(<span class="string">"news"</span>).build();</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        jestClient.execute(index);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">search</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    String json = <span class="string">""</span>;   <span class="comment">//搜索需要的json表达式</span></span><br><span class="line">    </span><br><span class="line">    Search search = <span class="keyword">new</span> Search.Builder(json).addIndex(<span class="string">"hubu"</span>).addType(<span class="string">"news"</span>).build();</span><br><span class="line">    </span><br><span class="line">     <span class="keyword">try</span> &#123;</span><br><span class="line">        SearchResult result = jestClient.execute(search);</span><br><span class="line">        System.out.println(result.getJsonString());</span><br><span class="line">    &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>更多详情可以参照github上的jest文档。。</p>
+</li>
+</ol>
+<h3 id="springboot整合springdata-elasticsearch"><a href="#springboot整合springdata-elasticsearch" class="headerlink" title="springboot整合springdata elasticsearch"></a>springboot整合springdata elasticsearch</h3><pre><code>1. client节点信息，clusterNodes；clusterName
+   2. ElasticsearchTemplate操作es
+   3. 编写一个ElasticsearchRepository的子接口来操作es</code></pre><ul>
+<li><p>首先配置spring.data.elasticsearch.cluster.name= 是自己url访问得到的节点名</p>
+<p>​                spring.data.elasticsearch.cluster.nodes= ip:9300</p>
+</li>
+<li><p>运行后有可能连接超时的错误，原因是版本不适配，进入springdata文档中elasticsearch文档</p>
+</li>
+</ul>
+<p>的version control得出spring data elasticsearch 和elasticsearch的适配</p>
+<ul>
+<li>可以进行springboot升级或安装老版本的es</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//继承ElasticsearchRepository可以使用一些方法</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">BookRepository</span> <span class="keyword">extends</span> <span class="title">ElasticsearchRepository</span>&lt;<span class="title">Book</span>,<span class="title">Integer</span>&gt;</span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">   <span class="comment">//可以自定义方法，参照官方文档编写规范方法名</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@Autowired</span></span><br><span class="line">BookRepository bookRepository;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Book book = <span class="keyword">new</span> Book();  <span class="comment">//在book中的需要使用@document标注属性有indexName，type</span></span><br><span class="line">    bookRepository.index(book);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>官方文档也有ElasticsearchTemplate使用例子。。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">springboot</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/07/12/spring-检索/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-springboot-消息" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1260,11 +1585,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">idea</a>
+                <a href="javascript:void(0)" class="js-tag color4">RabbitMQ</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">RabbitMQ</a>
+                <a href="javascript:void(0)" class="js-tag color5">idea</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1277,6 +1602,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">springboot cache</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">dubbo</a>
               </li>
              
               <li class="article-tag-list-item">

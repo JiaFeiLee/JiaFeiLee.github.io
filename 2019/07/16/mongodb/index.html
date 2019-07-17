@@ -6,18 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: markdown | Hexo</title>
+  <title>mongodb | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="java springboot">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/tags/markdown/index.html">
+  <meta name="description" content="MongoDB简介">
+<meta name="keywords" content="mongodb">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mongodb">
+<meta property="og:url" content="http://yoursite.com/2019/07/16/mongodb/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="java springboot">
+<meta property="og:description" content="MongoDB简介">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-07-17T01:27:57.878Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
-<meta name="twitter:description" content="java springboot">
+<meta name="twitter:title" content="mongodb">
+<meta name="twitter:description" content="MongoDB简介">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -157,60 +159,257 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-mongodb" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/01/markdown的格式入门-基础格式/" class="archive-article-date">
-  	<time datetime="2019-07-01T11:41:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-01</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/01/markdown的格式入门-基础格式/">markdown的格式入门-基础格式</a>
+    <h1 class="article-title" itemprop="name">
+      mongodb
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/07/16/mongodb/" class="archive-article-date">
+  	<time datetime="2019-07-16T06:15:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="MongoDB简介"><a href="#MongoDB简介" class="headerlink" title="MongoDB简介"></a>MongoDB简介</h2><a id="more"></a>
+
+<p>• MongoDB是为快速开发互联网Web应用 而设计的数据库系统。 </p>
+<p>• MongoDB的设计目标是极简、灵活、作为 Web应用栈的一部分。 </p>
+<p>• MongoDB的数据模型是面向文档的，所谓 文档是一种类似于JSON的结构，简单理解 MongoDB这个数据库中存的是各种各样的 JSON。（BSON）</p>
+<p>•<mark> 数据库（database）</mark> – 数据库是一个仓库，在仓库中可以存放集合。 </p>
+<p>•<mark> 集合（collection）</mark> – 集合类似于数组，在集合中可以存放文档。 </p>
+<p>•<mark> 文档（document）</mark> – 文档数据库中的最小单位，我们存储和操作的 内容都是文档。</p>
+<h2 id="mongodb的安装与配置与运行："><a href="#mongodb的安装与配置与运行：" class="headerlink" title="mongodb的安装与配置与运行："></a>mongodb的安装与配置与运行：</h2><p>​       1.将MongoDB的bin目录路径添加到用户变量path下。</p>
+<p>​       2.在<strong>C盘根目录</strong>下创建data文件夹，在data下 创建db文件夹，用来存放数据库。</p>
+<p>​       3.打开CMD命令行窗口，输入mongod开始运行服务器</p>
+<p>​       4.另开一个控制台输入mongo可以连接数据库</p>
+<p>​       5. – <strong>mongod –dbpath 路径 –port 端口号</strong> – 示例： </p>
+<p>​                    • mongod –dbpath C:\Users\lilichao\Desktop\mongo\data\db –port 123</p>
+<p>​       6.将mongodb设置为系统服务，可以自动在后台启动，不需要每次都动手启动:</p>
+<pre><code>1.在c盘根目录创建data
+    - 在data下创建db和log文件夹
+2.创建配置文件
+    在目录 C:\Program Files\MongoDB\Server\3.2 下添加一个配置文件
+    mongod.cfg
+3.以管理员的身份打开命令行窗口    
+
+4.执行如下的命令
+    sc.exe create MongoDB binPath= &quot;\&quot;C:\Program Files\MongoDB\Server\3.2\bin\mongod.exe\&quot; --service --config=\&quot;C:\Program Files\MongoDB\Server\3.2\mongod.cfg\&quot;&quot; DisplayName= &quot;MongoDB&quot; start= &quot;auto&quot;
+
+    sc.exe create MongoDB binPath= &quot;\&quot;mongod的bin目录\mongod.exe\&quot; --service --config=\&quot;mongo的安装目录\mongod.cfg\&quot;&quot; DisplayName= &quot;MongoDB&quot; start= &quot;auto&quot;
+
+5.启动mongodb服务
+
+6.如果启动失败，证明上边的操作有误，
+    在控制台输入 sc delete MongoDB 删除之前配置的服务
+    然后从第一步再来一次</code></pre><h2 id="mongodb增删改查"><a href="#mongodb增删改查" class="headerlink" title="mongodb增删改查"></a>mongodb增删改查</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">/*  向数据库中插入文档    如果没有指定_id，则自动生成ObjectId，根据时间戳生成,确保时间的唯一性*/</span>*</span><br><span class="line"></span><br><span class="line">*db.stus.insert(&#123;<span class="attr">name</span>:<span class="string">"猪八戒"</span>,<span class="attr">age</span>:<span class="number">22</span>,<span class="attr">gender</span>:<span class="string">"男"</span>&#125;);*</span><br><span class="line"></span><br><span class="line">*db.stus.insert([&#123;<span class="attr">name</span>:<span class="string">"ss"</span>,<span class="attr">age</span>:<span class="number">22</span>&#125;,&#123;<span class="attr">name</span>:<span class="string">"ddd"</span>,<span class="attr">age</span>:<span class="number">18</span>&#125;]);*</span><br><span class="line"></span><br><span class="line">*db.stus.find();*</span><br><span class="line"></span><br><span class="line">*<span class="comment">/*    查询    db.collection.find()     符合条件的数组    db.collection.findOne()  符合条件的第一个文档*/</span>*</span><br><span class="line"></span><br><span class="line">*db.stus.find();</span><br><span class="line"></span><br><span class="line">db.stus.find(&#123;<span class="attr">name</span>:<span class="string">"ss"</span>&#125;);</span><br><span class="line"></span><br><span class="line">db.stus.find(&#123;<span class="attr">age</span>:<span class="number">22</span>&#125;);</span><br><span class="line"></span><br><span class="line">db.stus.find().count()</span><br><span class="line"></span><br><span class="line"><span class="comment">/*   修改   db.collection.update(查询条件，新对象),默认情况下，会使用新对象替换旧对象,且只修改一个   如果需要修改指定的属性，可以使用修改操作符   $set   $unset   删除   updateOne()   updateMany()   replaceOne()*/</span>*</span><br><span class="line"></span><br><span class="line">*db.stus.update(&#123;<span class="attr">name</span>:<span class="string">"ss"</span>&#125;,&#123;<span class="attr">name</span>:<span class="string">"dd"</span>&#125;)*</span><br><span class="line"></span><br><span class="line">*db.stus.update(&#123;<span class="attr">name</span>:<span class="string">"dd"</span>&#125;,&#123;     <span class="attr">$set</span>:&#123;        <span class="attr">address</span>:<span class="string">"aaaaaa"</span>     &#125;&#125;)*</span><br><span class="line"></span><br><span class="line">*<span class="comment">/* *   删除    remove()    deleteOne()    deleteMany()*/</span></span><br><span class="line"></span><br><span class="line">db.stus.remove(&#123;<span class="attr">name</span>:<span class="string">"dd"</span>&#125;)</span><br><span class="line"></span><br><span class="line">db.stus.drop();</span><br></pre></td></tr></table></figure>
+
+<p>use test                切换到test数据库</p>
+<h4 id="文档间的关系"><a href="#文档间的关系" class="headerlink" title="文档间的关系"></a>文档间的关系</h4><p>​    <mark>一对一</mark>            妻子，丈夫</p>
+<p>   <mark>一对多</mark>            用户，订单</p>
+<p>   <mark>多对多</mark>             老师，学生</p>
+<h4 id="sort和投影"><a href="#sort和投影" class="headerlink" title="sort和投影"></a>sort和投影</h4><p>​     sort()指定文档排序的规则，需要传递对象，1表示升序，-1表示降序</p>
+<p>​     db.emp.find({},{ename:1,_id:0})   投影， 在第二个参数位置指定，1表示选中，-1表示不选中</p>
+<h2 id="mongoose"><a href="#mongoose" class="headerlink" title="mongoose"></a>mongoose</h2><p>• 之前我们都是通过shell来完成对数据库的各种操作的，在 开发中大部分时候我们都需要通过程序来完成对数据库的操作。 </p>
+<p>• 而Mongoose就是一个让我们可以通过Node来操作 MongoDB的模块。 </p>
+<p>• Mongoose是一个对象文档模型（ODM）库，它对 Node原生的MongoDB模块进行了进一步的优化封装， 并提供了更多的功能。 </p>
+<p>• 在大多数情况下，它被用来把结构化的模式应用到一个 MongoDB集合，并提供了验证和类型转换等好处</p>
+<p><strong>好处：</strong></p>
+<p>• 可以为文档创建一个模式结构（Schema） </p>
+<p>• 可以对模型中的对象/文档进行验证 </p>
+<p>• 数据可以通过类型转换转换为对象模型 </p>
+<p>• 可以使用中间件来应用业务逻辑挂钩 </p>
+<p>• 比Node原生的MongoDB驱动更容易</p>
+<p><strong>新的对象：</strong></p>
+<p>– Schema(模式对象) • Schema对象定义约束了数据库中的文档结构 </p>
+<p>– Model • Model对象作为集合中的所有文档的表示，相当于 MongoDB数据库中的集合collection </p>
+<p>– Document • Document表示集合中的具体文档，相当于集合中 的一个具体的文档</p>
+<p><strong>通过mongoose连接MongoDB</strong> ：</p>
+<p>• 使用Mongoose必须先安装mongoose包 – npm install mongoose </p>
+<p>• 加载Mongoose – const mongoose = require(“mongoose”) </p>
+<p>• 连接数据库 – mongoose.connect(“mongodb://地址”) </p>
+<p>​                       – 地址例子：mongodb://127.0.0.1/mg_test</p>
+<p> • 断开连接 – mongoose.disconnect()</p>
+<p><strong>schema:</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//将mongoose.Schema 赋值给一个变量</span></span><br><span class="line"><span class="keyword">var</span> Schema = mongoose.Schema;</span><br><span class="line"></span><br><span class="line"><span class="comment">//创建Schema（模式）对象</span></span><br><span class="line"><span class="keyword">var</span> stuSchema = <span class="keyword">new</span> Schema(&#123;</span><br><span class="line"></span><br><span class="line">	name:<span class="built_in">String</span>,</span><br><span class="line">	age:<span class="built_in">Number</span>,</span><br><span class="line">	gender:&#123;</span><br><span class="line">		type:<span class="built_in">String</span>,</span><br><span class="line">		<span class="keyword">default</span>:<span class="string">"female"</span></span><br><span class="line">	&#125;,</span><br><span class="line">	address:<span class="built_in">String</span></span><br><span class="line"></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">//通过Schema来创建Model</span></span><br><span class="line"><span class="comment">//Model代表的是数据库中的集合，通过Model才能对数据库进行操作</span></span><br><span class="line"><span class="comment">//mongoose.model(modelName, schema):</span></span><br><span class="line"><span class="comment">//modelName 就是要映射的集合名 mongoose会自动将集合名变成复数</span></span><br><span class="line"><span class="keyword">var</span> StuModel = mongoose.model(<span class="string">"student"</span> , stuSchema);</span><br><span class="line"></span><br><span class="line"><span class="comment">//向数据库中插入一个文档</span></span><br><span class="line"><span class="comment">//StuModel.create(doc, function(err)&#123;&#125;);</span></span><br><span class="line">StuModel.create(&#123;</span><br><span class="line">	name:<span class="string">"白骨精"</span>,</span><br><span class="line">	age:<span class="number">16</span>,</span><br><span class="line">	address:<span class="string">"白骨洞"</span></span><br><span class="line">&#125;,<span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(!err)&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">"插入成功~~~"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p><strong>model:</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> StuModel = mongoose.model(<span class="string">"student"</span> , stuSchema);</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	- 有了Model，我们就可以来对数据库进行增删改查的操作了</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> 	Model.create(doc(s), [callback])</span></span><br><span class="line"><span class="comment"> 	- 用来创建一个或多个文档并添加到数据库中</span></span><br><span class="line"><span class="comment"> 	- 参数：</span></span><br><span class="line"><span class="comment"> 		doc(s) 可以是一个文档对象，也可以是一个文档对象的数组</span></span><br><span class="line"><span class="comment"> 		callback 当操作完成以后调用的回调函数</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> 	查询的：</span></span><br><span class="line"><span class="comment">	 Model.find(conditions, [projection], [options], [callback])</span></span><br><span class="line"><span class="comment">	 	- 查询所有符合条件的文档 总会返回一个数组</span></span><br><span class="line"><span class="comment">	 Model.findById(id, [projection], [options], [callback])</span></span><br><span class="line"><span class="comment">	 	- 根据文档的id属性查询文档</span></span><br><span class="line"><span class="comment">	 Model.findOne([conditions], [projection], [options], [callback])</span></span><br><span class="line"><span class="comment">	 	- 查询符合条件的第一个文档 总和返回一个具体的文档对象</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> 		conditions 查询的条件</span></span><br><span class="line"><span class="comment"> 		projection 投影 需要获取到的字段</span></span><br><span class="line"><span class="comment"> 			- 两种方式</span></span><br><span class="line"><span class="comment"> 				&#123;name:1,_id:0&#125;</span></span><br><span class="line"><span class="comment"> 				"name -_id"</span></span><br><span class="line"><span class="comment"> 		options  查询选项（skip limit）</span></span><br><span class="line"><span class="comment"> 				&#123;skip:3 , limit:1&#125;</span></span><br><span class="line"><span class="comment"> 		callback 回调函数，查询结果会通过回调函数返回</span></span><br><span class="line"><span class="comment"> 					回调函数必须传，如果不传回调函数，压根不会查询</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*StuModel.find(&#123;name:"唐僧"&#125;,function (err , docs) &#123;</span></span><br><span class="line"><span class="comment">	if(!err)&#123;</span></span><br><span class="line"><span class="comment">		console.log(docs);</span></span><br><span class="line"><span class="comment">	&#125;</span></span><br><span class="line"><span class="comment">&#125;);*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*StuModel.find(&#123;&#125;,&#123;name:1 , _id:0&#125;,function (err , docs) &#123;</span></span><br><span class="line"><span class="comment">	if(!err)&#123;</span></span><br><span class="line"><span class="comment">		console.log(docs);</span></span><br><span class="line"><span class="comment">	&#125;</span></span><br><span class="line"><span class="comment">&#125;);*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*StuModel.find(&#123;&#125;,"name age -_id", &#123;skip:3 , limit:1&#125; , function (err , docs) &#123;</span></span><br><span class="line"><span class="comment">	if(!err)&#123;</span></span><br><span class="line"><span class="comment">		console.log(docs);</span></span><br><span class="line"><span class="comment">	&#125;</span></span><br><span class="line"><span class="comment">&#125;);*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*StuModel.findOne(&#123;&#125; , function (err , doc) &#123;</span></span><br><span class="line"><span class="comment">	if(!err)&#123;</span></span><br><span class="line"><span class="comment">		console.log(doc);</span></span><br><span class="line"><span class="comment">	&#125;</span></span><br><span class="line"><span class="comment">&#125;);*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*StuModel.findById("59c4c3cf4e5483191467d392" , function (err , doc) &#123;</span></span><br><span class="line"><span class="comment">	if(!err)&#123;</span></span><br><span class="line"><span class="comment">		//console.log(doc);</span></span><br><span class="line"><span class="comment">		//通过find()查询的结果，返回的对象，就是Document，文档对象</span></span><br><span class="line"><span class="comment">		//Document对象是Model的实例</span></span><br><span class="line"><span class="comment">		console.log(doc instanceof StuModel);</span></span><br><span class="line"><span class="comment">	&#125;</span></span><br><span class="line"><span class="comment">&#125;);*/</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*StuModel.create([</span></span><br><span class="line"><span class="comment">	&#123;</span></span><br><span class="line"><span class="comment">		name:"沙和尚",</span></span><br><span class="line"><span class="comment">		age:38,</span></span><br><span class="line"><span class="comment">		gender:"male",</span></span><br><span class="line"><span class="comment">		address:"流沙河"</span></span><br><span class="line"><span class="comment">	&#125;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">],function (err) &#123;</span></span><br><span class="line"><span class="comment">	if(!err)&#123;</span></span><br><span class="line"><span class="comment">		console.log(arguments);</span></span><br><span class="line"><span class="comment">	&#125;</span></span><br><span class="line"><span class="comment">&#125;);*/</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	修改</span></span><br><span class="line"><span class="comment"> Model.update(conditions, doc, [options], [callback])</span></span><br><span class="line"><span class="comment"> Model.updateMany(conditions, doc, [options], [callback])</span></span><br><span class="line"><span class="comment"> Model.updateOne(conditions, doc, [options], [callback])</span></span><br><span class="line"><span class="comment"> 	- 用来修改一个或多个文档</span></span><br><span class="line"><span class="comment"> 	- 参数：</span></span><br><span class="line"><span class="comment"> 		conditions 查询条件</span></span><br><span class="line"><span class="comment"> 		doc 修改后的对象</span></span><br><span class="line"><span class="comment"> 		options 配置参数</span></span><br><span class="line"><span class="comment"> 		callback 回调函数</span></span><br><span class="line"><span class="comment"> Model.replaceOne(conditions, doc, [options], [callback])</span></span><br><span class="line"><span class="comment">* */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//修改唐僧的年龄为20</span></span><br><span class="line"><span class="comment">/*StuModel.updateOne(&#123;name:"唐僧"&#125;,&#123;$set:&#123;age:20&#125;&#125;,function (err) &#123;</span></span><br><span class="line"><span class="comment">	if(!err)&#123;</span></span><br><span class="line"><span class="comment">		console.log("修改成功");</span></span><br><span class="line"><span class="comment">	&#125;</span></span><br><span class="line"><span class="comment">&#125;);*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	删除：</span></span><br><span class="line"><span class="comment"> Model.remove(conditions, [callback])</span></span><br><span class="line"><span class="comment"> Model.deleteOne(conditions, [callback])</span></span><br><span class="line"><span class="comment"> Model.deleteMany(conditions, [callback])</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">/*StuModel.remove(&#123;name:"白骨精"&#125;,function (err) &#123;</span></span><br><span class="line"><span class="comment">	if(!err)&#123;</span></span><br><span class="line"><span class="comment">		console.log("删除成功~~");</span></span><br><span class="line"><span class="comment">	&#125;</span></span><br><span class="line"><span class="comment">&#125;);*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> Model.count(conditions, [callback])</span></span><br><span class="line"><span class="comment"> 	- 统计文档的数量的</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">StuModel.count(&#123;&#125;,<span class="function"><span class="keyword">function</span> (<span class="params">err , count</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(!err)&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(count);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p><strong>document:</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建一个Document</span></span><br><span class="line"><span class="keyword">var</span> stu = <span class="keyword">new</span> StuModel(&#123;</span><br><span class="line">	name:<span class="string">"奔波霸"</span>,</span><br><span class="line">	age:<span class="number">48</span>,</span><br><span class="line">	gender:<span class="string">"male"</span>,</span><br><span class="line">	address:<span class="string">"碧波潭"</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	document的方法</span></span><br><span class="line"><span class="comment"> 		Model#save([options], [fn])</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">stu.save(function (err) &#123;</span></span><br><span class="line"><span class="comment">	if(!err)&#123;</span></span><br><span class="line"><span class="comment">		console.log("保存成功~~~");</span></span><br><span class="line"><span class="comment">	&#125;</span></span><br><span class="line"><span class="comment">&#125;);*/</span></span><br><span class="line"></span><br><span class="line">StuModel.findOne(&#123;&#125;,<span class="function"><span class="keyword">function</span> (<span class="params">err , doc</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(!err)&#123;</span><br><span class="line">		<span class="comment">/*</span></span><br><span class="line"><span class="comment">		 	update(update,[options],[callback])</span></span><br><span class="line"><span class="comment">		 		- 修改对象</span></span><br><span class="line"><span class="comment">		 	remove([callback])</span></span><br><span class="line"><span class="comment">		 		- 删除对象</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">		 */</span></span><br><span class="line">		<span class="comment">//console.log(doc);</span></span><br><span class="line">		<span class="comment">/*doc.update(&#123;$set:&#123;age:28&#125;&#125;,function (err) &#123;</span></span><br><span class="line"><span class="comment">			if(!err)&#123;</span></span><br><span class="line"><span class="comment">				console.log("修改成功~~~");</span></span><br><span class="line"><span class="comment">			&#125;</span></span><br><span class="line"><span class="comment">		&#125;);*/</span></span><br><span class="line"></span><br><span class="line">		<span class="comment">/*doc.age = 18;</span></span><br><span class="line"><span class="comment">		doc.save();*/</span></span><br><span class="line"></span><br><span class="line">		<span class="comment">/*doc.remove(function (err) &#123;</span></span><br><span class="line"><span class="comment">			if(!err)&#123;</span></span><br><span class="line"><span class="comment">				console.log("大师兄再见~~~");</span></span><br><span class="line"><span class="comment">			&#125;</span></span><br><span class="line"><span class="comment">		&#125;);*/</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">		<span class="comment">/*</span></span><br><span class="line"><span class="comment">			get(name)</span></span><br><span class="line"><span class="comment">				- 获取文档中的指定属性值</span></span><br><span class="line"><span class="comment">			set(name , value)</span></span><br><span class="line"><span class="comment">				- 设置文档的指定的属性值</span></span><br><span class="line"><span class="comment">			id</span></span><br><span class="line"><span class="comment">				- 获取文档的_id属性值</span></span><br><span class="line"><span class="comment">			 toJSON() ******</span></span><br><span class="line"><span class="comment">			 	- 转换为一个JSON对象</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">			 toObject()</span></span><br><span class="line"><span class="comment">			 	- 将Document对象转换为一个普通的JS对象</span></span><br><span class="line"><span class="comment">			 		转换为普通的js对象以后，注意所有的Document对象的方法或属性都不能使用了</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">		 */</span></span><br><span class="line">		<span class="comment">//console.log(doc.get("age"));</span></span><br><span class="line">		<span class="comment">//console.log(doc.age);</span></span><br><span class="line"></span><br><span class="line">		<span class="comment">//doc.set("name","猪小小");</span></span><br><span class="line">		<span class="comment">//doc.name = "hahaha";</span></span><br><span class="line"></span><br><span class="line">		<span class="comment">//console.log(doc._id);</span></span><br><span class="line">		<span class="comment">//var j = doc.toJSON();</span></span><br><span class="line">		<span class="comment">//console.log(j);</span></span><br><span class="line"></span><br><span class="line">		<span class="comment">//var o = doc.toObject();</span></span><br><span class="line"></span><br><span class="line">		<span class="comment">//console.log(o);</span></span><br><span class="line"></span><br><span class="line">		doc = doc.toObject();</span><br><span class="line"></span><br><span class="line">		<span class="keyword">delete</span> doc.address;</span><br><span class="line"></span><br><span class="line">		<span class="built_in">console</span>.log(doc._id);</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="springboot整合MongoDB转载"><a href="#springboot整合MongoDB转载" class="headerlink" title="springboot整合MongoDB转载"></a>springboot整合MongoDB转载</h2><p><a href="https://www.cnblogs.com/nbfujx/p/7999171.html" target="_blank" rel="noopener">springboot整合MongoDB转载</a></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/images/weixin.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">markdown</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">mongodb</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/07/16/mongodb/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2019/07/14/dubbo/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">dubbo</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
+  <div id="gitment-ctn"></div> 
+<link rel="stylesheet" href="//imsun.github.io/gitment/style/default.css"> 
+<script src="//imsun.github.io/gitment/dist/gitment.browser.js"></script>
+
+<script>
+var gitment = new Gitment({
+  id: "http://yoursite.com/2019/07/16/mongodb/",
+  owner: 'JiaFeiLee',
+  repo: 'https://github.com/JiaFeiLee/JiaFeiLee.github.io',
+  oauth: {
+    client_id: '51c5c9a5b66ebf689a36',
+    client_secret: '0dcad1ba2cdaf26b0906a54a37e7cef9359eefa6',
+  },
+})
+gitment.render('gitment-ctn')
+</script>
+  
 
 
           </div>
@@ -233,9 +432,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: true,
 		toc_hide_index: true,

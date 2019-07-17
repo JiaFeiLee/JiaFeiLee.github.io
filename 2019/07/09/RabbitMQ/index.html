@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>RabbitMQ | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="RabbitMQ基础概念​          消息服务擅长于解决多系统，异构系统间的数据交换问题，也可以把它用于系统间服务的相互调用。消息中间件事消息传输过程中保存消息的容器。队列的主要目的是提供路由并保证消息的传递；如果发送消息是接收者不可用，消息队列会保留消息，直到可以成功传递它为止，消息队列保存消息也是有期限的。 消息中间件的特点​        1. 采用异步处理模式：发送一个消息而无须等">
+  <meta name="description" content="RabbitMQ基础概念">
 <meta name="keywords" content="RabbitMQ">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RabbitMQ">
 <meta property="og:url" content="http://yoursite.com/2019/07/09/RabbitMQ/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="RabbitMQ基础概念​          消息服务擅长于解决多系统，异构系统间的数据交换问题，也可以把它用于系统间服务的相互调用。消息中间件事消息传输过程中保存消息的容器。队列的主要目的是提供路由并保证消息的传递；如果发送消息是接收者不可用，消息队列会保留消息，直到可以成功传递它为止，消息队列保存消息也是有期限的。 消息中间件的特点​        1. 采用异步处理模式：发送一个消息而无须等">
+<meta property="og:description" content="RabbitMQ基础概念">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-07-09T12:48:54.206Z">
+<meta property="og:updated_time" content="2019-07-17T01:32:08.544Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RabbitMQ">
-<meta name="twitter:description" content="RabbitMQ基础概念​          消息服务擅长于解决多系统，异构系统间的数据交换问题，也可以把它用于系统间服务的相互调用。消息中间件事消息传输过程中保存消息的容器。队列的主要目的是提供路由并保证消息的传递；如果发送消息是接收者不可用，消息队列会保留消息，直到可以成功传递它为止，消息队列保存消息也是有期限的。 消息中间件的特点​        1. 采用异步处理模式：发送一个消息而无须等">
+<meta name="twitter:description" content="RabbitMQ基础概念">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -179,7 +179,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="RabbitMQ基础概念"><a href="#RabbitMQ基础概念" class="headerlink" title="RabbitMQ基础概念"></a>RabbitMQ基础概念</h2><p>​          消息服务擅长于解决多系统，异构系统间的数据交换问题，也可以把它用于系统间服务的相互调用。消息中间件事消息传输过程中<strong>保存消息的容器</strong>。队列的主要目的是<strong>提供路由并保证消息的传递</strong>；如果发送消息是接收者不可用，<strong>消息队列会保留消息</strong>，直到可以成功传递它为止，<strong>消息队列保存消息也是有期限的。</strong></p>
+        <h2 id="RabbitMQ基础概念"><a href="#RabbitMQ基础概念" class="headerlink" title="RabbitMQ基础概念"></a>RabbitMQ基础概念</h2><a id="more"></a>
+
+<p>​          消息服务擅长于解决多系统，异构系统间的数据交换问题，也可以把它用于系统间服务的相互调用。消息中间件事消息传输过程中<strong>保存消息的容器</strong>。队列的主要目的是<strong>提供路由并保证消息的传递</strong>；如果发送消息是接收者不可用，<strong>消息队列会保留消息</strong>，直到可以成功传递它为止，<strong>消息队列保存消息也是有期限的。</strong></p>
 <h2 id="消息中间件的特点"><a href="#消息中间件的特点" class="headerlink" title="消息中间件的特点"></a>消息中间件的特点</h2><p>​        1. 采用<strong>异步</strong>处理模式：发送一个消息而无须等待响应，接收者无须对消息发送者做出同步回应，整个过程是异步的</p>
 <p>​        2. 应用程序和应用程序调用关系为松耦合关系</p>
 <p>​                            <strong>发送者和接收者不必了解对方，只需要确认消息</strong></p>

@@ -6,18 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2019/7 | Hexo</title>
+  <title>动态规划 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="java springboot">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/archives/2019/07/index.html">
+  <meta name="description" content="1.打家劫舍">
+<meta name="keywords" content="动态规划">
+<meta property="og:type" content="article">
+<meta property="og:title" content="动态规划">
+<meta property="og:url" content="http://yoursite.com/2019/07/20/动态规划/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="java springboot">
+<meta property="og:description" content="1.打家劫舍">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-07-21T09:49:15.457Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
-<meta name="twitter:description" content="java springboot">
+<meta name="twitter:title" content="动态规划">
+<meta name="twitter:description" content="1.打家劫舍">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -157,36 +159,174 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-动态规划" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/20/动态规划/" class="archive-article-date">
-  	<time datetime="2019-07-20T09:02:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-20</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/20/动态规划/">动态规划</a>
+    <h1 class="article-title" itemprop="name">
+      动态规划
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/07/20/动态规划/" class="archive-article-date">
+  	<time datetime="2019-07-20T09:02:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="1-打家劫舍"><a href="#1-打家劫舍" class="headerlink" title="1.打家劫舍"></a>1.打家劫舍</h4><a id="more"></a>
+
+<p><a href="https://leetcode-cn.com/problems/house-robber/" target="_blank" rel="noopener">力扣链接</a></p>
+<p>你是一个专业的小偷，计划偷窃沿街的房屋。每间房内都藏有一定的现金，影响你偷窃的唯一制约因素就是相邻的房屋装有相互连通的防盗系统，如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警。</p>
+<p>给定一个代表每个房屋存放金额的非负整数数组，计算你在不触动警报装置的情况下，能够偷窃到的最高金额。</p>
+<p>示例：</p>
+<p>输入: [1,2,3,1]<br>输出: 4<br>解释: 偷窃 1 号房屋 (金额 = 1) ，然后偷窃 3 号房屋 (金额 = 3)。<br>     偷窃到的最高金额 = 1 + 3 = 4 。</p>
+<p><strong>确定原问题和子问题：</strong></p>
+<p>​         <strong>原问题：n个房间最优解         子问题：前1，前2….前n个房间的最优解</strong></p>
+<p><strong>确认状态：第i个状态即为前i个房间能够获得的最大财宝</strong></p>
+<p><strong>边界转态：前1个和前2个房间的最优解</strong></p>
+<p><strong>状态转移方程：a: i+前i-2个房间的最优解</strong></p>
+<p>​                           <strong>b:前i-1个房间的最优解</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">rob</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(nums.length == <span class="number">0</span>) &#123;         <span class="comment">//判断长度为1或0</span></span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span>(nums.length == <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> nums[<span class="number">0</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span>[] dp = <span class="keyword">new</span> <span class="keyword">int</span>[nums.length];</span><br><span class="line">        dp[<span class="number">0</span>] = nums[<span class="number">0</span>];</span><br><span class="line">        dp[<span class="number">1</span>] = Math.max(nums[<span class="number">0</span>], nums[<span class="number">1</span>]);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>; i&lt;nums.length; i++) &#123;</span><br><span class="line">            dp[i] = Math.max(nums[i]+dp[i-<span class="number">2</span>], dp[i-<span class="number">1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[nums.length-<span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-最大子序和"><a href="#2-最大子序和" class="headerlink" title="2.最大子序和"></a>2.最大子序和</h4><p><a href="https://leetcode-cn.com/problems/maximum-subarray/" target="_blank" rel="noopener">力扣链接</a></p>
+<p>给定一个整数数组 <code>nums</code> ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。</p>
+<p>示例：</p>
+<p>输入: [-2,1,-3,4,-1,2,1,-5,4],<br>输出: 6<br>解释: 连续子数组 [4,-1,2,1] 的和最大，为 6。</p>
+<p><strong>确定原问题和子问题：</strong></p>
+<p>​         <strong>原问题：nums的最大子数组和         子问题：每个点前面的数组最大子数组和</strong></p>
+<p><strong>确认状态：第i个状态即为前i个数的最大子数组和</strong></p>
+<p><strong>边界转态：前1个数值</strong></p>
+<p><strong>状态转移方程：a: nums[i]+dp[i-1]</strong></p>
+<p>​                           <strong>b:nums[i]</strong></p>
+<p>经过递推分析，现在的第i为一定是与前面的子数组是连续的，所以可以为上面的状态转移方程</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxSubArray</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;       </span><br><span class="line">        <span class="keyword">if</span>(nums.length == <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> nums[<span class="number">0</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span>[] dp = <span class="keyword">new</span> <span class="keyword">int</span>[nums.length];</span><br><span class="line">        <span class="keyword">int</span> max = nums[<span class="number">0</span>];</span><br><span class="line">        dp[<span class="number">0</span>] = nums[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;nums.length; i++) &#123;</span><br><span class="line">            dp[i] = Math.max(nums[i], dp[i-<span class="number">1</span>]+nums[i]);</span><br><span class="line">            <span class="keyword">if</span>(max &lt; dp[i]) &#123;</span><br><span class="line">                max = dp[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> max;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-零钱兑换"><a href="#3-零钱兑换" class="headerlink" title="3.零钱兑换"></a>3.零钱兑换</h4><p><a href="https://leetcode-cn.com/problems/coin-change/" target="_blank" rel="noopener">力扣链接</a></p>
+<p>给定不同面额的硬币 coins 和一个总金额 amount。编写一个函数来计算可以凑成总金额所需的最少的硬币个数。如果没有任何一种硬币组合能组成总金额，返回 -1。</p>
+<p>示例：</p>
+<p>输入: coins = [1, 2, 5], amount = 11<br>输出: 3<br>解释: 11 = 5 + 5 + 1</p>
+<p><strong>确定原问题和子问题：</strong></p>
+<p>​         <strong>原问题：指定金额的最少硬币数         子问题：前面的金额最少硬币数</strong></p>
+<p><strong>确认状态：第i个状态即为最少硬币数可兑换</strong></p>
+<p><strong>边界转态：第1个数值dp[0]=0</strong></p>
+<p><strong>状态转移方程：dp[i] = min(dp[i-coins[0]],dp[i-coins[1]],…) + 1</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">coinChange</span><span class="params">(<span class="keyword">int</span>[] coins, <span class="keyword">int</span> amount)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//定义dp数组</span></span><br><span class="line">        <span class="keyword">int</span>[] dp = <span class="keyword">new</span> <span class="keyword">int</span>[amount+<span class="number">1</span>];</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">//进行初始化</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=amount; i++) &#123;</span><br><span class="line">            dp[i] = -<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;=amount; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;coins.length; j++) &#123;     <span class="comment">//循环各个面值</span></span><br><span class="line">                <span class="keyword">if</span>(i-coins[j]&gt;=<span class="number">0</span> &amp;&amp; dp[i-coins[j]]!=-<span class="number">1</span>) &#123;  <span class="comment">//该面值大于该硬币且可转化为上一个转态</span></span><br><span class="line">                     <span class="keyword">if</span>(dp[i] == -<span class="number">1</span> || dp[i] &gt; dp[i-coins[j]]+<span class="number">1</span>) &#123;  </span><br><span class="line">                         dp[i] = dp[i-coins[j]]+<span class="number">1</span>;</span><br><span class="line">                     &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[amount];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-三角形"><a href="#4-三角形" class="headerlink" title="4.三角形"></a>4.三角形</h4><p><a href="https://leetcode-cn.com/problems/triangle/" target="_blank" rel="noopener">力扣链接</a></p>
+<p>给定一个三角形，找出自顶向下的最小路径和。每一步只能移动到下一行中相邻的结点上。</p>
+<p>例如，给定三角形：</p>
+<p>[<br>     [2],<br>    [3,4],<br>   [6,5,7],<br>  [4,1,8,3]<br>]</p>
+<p>自顶向下的最小路径和为 <code>11</code>（即，<strong>2</strong> + <strong>3</strong> + <strong>5</strong> + <strong>1</strong> = 11）。</p>
+<p><strong>确定原问题和子问题：</strong></p>
+<p>​         <strong>原问题：从上向下最小路径和         子问题：每一行的所有元素的的最小路径和</strong></p>
+<p><strong>确认状态：第i，j个状态即为到达该点的最小路径和</strong></p>
+<p><strong>边界转态：从上向下：顶点；从下向上：最后一个子集和</strong></p>
+<p><strong>状态转移方程：dp[i][j] = Math.min(dp[i+1][j],dp[i+1][j+1])+triangle.get(i).get(j)</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">minimumTotal</span><span class="params">(List&lt;List&lt;Integer&gt;&gt; triangle)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> m = triangle.size();</span><br><span class="line">        <span class="keyword">int</span> n = triangle.get(m-<span class="number">1</span>).size();</span><br><span class="line">        <span class="keyword">int</span> dp[][] = <span class="keyword">new</span> <span class="keyword">int</span>[m][n];   <span class="comment">//根据集合求出两个size，不能根据toArray得到</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++) &#123;      <span class="comment">//初始化最后一行</span></span><br><span class="line">            dp[m-<span class="number">1</span>][i] = triangle.get(m-<span class="number">1</span>).get(i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=m-<span class="number">2</span>;i&gt;=<span class="number">0</span>;i--) &#123;    <span class="comment">//遍历除最后一行的整个三角形</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;triangle.get(i).size();j++) &#123;</span><br><span class="line">                dp[i][j] = Math.min(dp[i+<span class="number">1</span>][j],dp[i+<span class="number">1</span>][j+<span class="number">1</span>])+triangle.get(i).get(j);       <span class="comment">//状态转移方程</span></span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[<span class="number">0</span>][<span class="number">0</span>];     <span class="comment">//此时三角顶点为所求</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><p>\1. Long[] l = new Long[<total size>];  </total></p>
+</li>
+<li><p>list.toArray(l);  </p>
+</li>
+<li></li>
+<li><p>\2. Long[] l = (Long[]) list.toArray(new Long[0]);  </p>
+</li>
+<li></li>
+<li><p>\3. Long[] a = new Long[<total size>];  </total></p>
+</li>
+<li><p>Long[] l = (Long[]) list.toArray(a);  </p>
+<p>ArrayList.toArray()用法。。</p>
+</li>
+</ol>
+<h4 id="5-最长上升子序列"><a href="#5-最长上升子序列" class="headerlink" title="5.最长上升子序列"></a>5.最长上升子序列</h4><p><a href="https://leetcode-cn.com/problems/longest-increasing-subsequence/" target="_blank" rel="noopener">力扣链接</a></p>
+<p>给定一个无序的整数数组，找到其中最长上升子序列的长度。（未规定连续）</p>
+<p>示例：</p>
+<p>输入: [10,9,2,5,3,7,101,18]<br>输出: 4<br>解释: 最长的上升子序列是 [2,3,7,101]，它的长度是 4。</p>
+<p><strong>确定原问题和子问题：</strong></p>
+<p>​         <strong>原问题：最长上升子序列长度         子问题：每个元素前面的数组的最长上升子序列长度</strong></p>
+<p><strong>确认状态：第i个状态即为当前子数组的最长上升子序列长度</strong></p>
+<p><strong>边界转态：dp[0]=1</strong></p>
+<p><strong>状态转移方程：dp[i]=1+max(dp[0],dp[1],…,dp[i-1])  (需满足nums[i]&gt;nums[j])</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">lengthOfLIS</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//首先子序列不是连续的，其次，问题分解成每个元素前的子数组解决。</span></span><br><span class="line">        <span class="keyword">if</span>(nums.length == <span class="number">0</span>) &#123;           <span class="comment">//不要忘记边界的返回值</span></span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span>(nums.length == <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//定义dp数组</span></span><br><span class="line">        <span class="keyword">int</span>[] dp = <span class="keyword">new</span> <span class="keyword">int</span>[nums.length];</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">1</span>;                       <span class="comment">//只有一个数时为1边界状态</span></span><br><span class="line">        <span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;nums.length; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;i; j++) &#123;            </span><br><span class="line">                <span class="keyword">if</span>(nums[i]&gt;nums[j] &amp;&amp; dp[i]&lt;dp[j]+<span class="number">1</span>) &#123;       </span><br><span class="line">                    dp[i] = dp[j]+<span class="number">1</span>;</span><br><span class="line">                &#125; </span><br><span class="line">            &#125;</span><br><span class="line">            dp[i] = dp[i]&gt;<span class="number">0</span>?dp[i]:<span class="number">1</span>;             <span class="comment">//当这个数比前面所有的数都要小时的情况</span></span><br><span class="line">            <span class="keyword">if</span>(result &lt; dp[i]) &#123;</span><br><span class="line">                result = dp[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="6-地下城游戏"><a href="#6-地下城游戏" class="headerlink" title="6.地下城游戏"></a>6.地下城游戏</h4><p><a href="https://leetcode-cn.com/problems/dungeon-game/" target="_blank" rel="noopener">力扣链接</a></p>
+<p>一些恶魔抓住了公主（P）并将她关在了地下城的右下角。地下城是由 M x N 个房间组成的二维网格。我们英勇的骑士（K）最初被安置在左上角的房间里，他必须穿过地下城并通过对抗恶魔来拯救公主。</p>
+<p>骑士的初始健康点数为一个正整数。如果他的健康点数在某一时刻降至 0 或以下，他会立即死亡。</p>
+<p>有些房间由恶魔守卫，因此骑士在进入这些房间时会失去健康点数（若房间里的值为负整数，则表示骑士将损失健康点数）；其他房间要么是空的（房间里的值为 0），要么包含增加骑士健康点数的魔法球（若房间里的值为正整数，则表示骑士将增加健康点数）。</p>
+<p>为了尽快到达公主，骑士决定每次只向右或向下移动一步。</p>
+<p> 任何房间都可能对骑士的健康点数造成威胁，也可能增加骑士的健康点数，包括骑士进入的左上角房间以及公主被监禁的右下角房间。</p>
+<p>编写一个函数来计算确保骑士能够拯救到公主所需的最低初始健康点数。</p>
+<p>示例：</p>
+<p>考虑到如下布局的地下城，如果骑士遵循最佳路径 <code>右 -&gt; 右 -&gt; 下 -&gt; 下</code>，则骑士的初始健康点数至少为 <strong>7</strong>。</p>
+<table>
+<thead>
+<tr>
+<th>2 (K)</th>
+<th>-3</th>
+<th>3</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-5</td>
+<td>-10</td>
+<td>1</td>
+</tr>
+<tr>
+<td>10</td>
+<td>30</td>
+<td>-5 (P)</td>
+</tr>
+</tbody></table>
+<p><mark>从左上往下递推：表示的是每个格子最多能够获得多少血量，无法转换成题目初始最少要有多少血的问题。</mark></p>
+<p><mark>从右下往左上退：表示的是<strong>到达每个格子前至少有多少血量</strong>，才能够保证行走的过程中始终生命值至少为1</mark></p>
+<p><strong>确定原问题和子问题：</strong></p>
+<p>​         <strong>原问题：整个数组的最小血量         子问题：每个节点的最小血量</strong></p>
+<p><strong>确认状态：第i，j个状态即为当前节点的至少有多少血量</strong></p>
+<p><strong>边界转态：dp[row-1][column-1]=max(1,1-dungeon[row-1][column-1])</strong></p>
+<p><strong>状态转移方程：dp[i][j] = Math.max(1, Math.min(dp[i+1][j],dp[i][j+1])-dungeon[i][j])</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">calculateMinimumHP</span><span class="params">(<span class="keyword">int</span>[][] dungeon)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//从右下往左上遍历为正确途径</span></span><br><span class="line">        <span class="comment">//首先定义dp</span></span><br><span class="line">        <span class="keyword">int</span> row = dungeon.length;</span><br><span class="line">        <span class="keyword">int</span> column = dungeon[<span class="number">0</span>].length;</span><br><span class="line">        <span class="keyword">int</span>[][] dp = <span class="keyword">new</span> <span class="keyword">int</span>[row][column];</span><br><span class="line">        <span class="comment">//初始化右下角公主的值</span></span><br><span class="line">        dp[row-<span class="number">1</span>][column-<span class="number">1</span>] = dungeon[row-<span class="number">1</span>][column-<span class="number">1</span>]&gt;=<span class="number">1</span> ? <span class="number">1</span> : <span class="number">1</span>-dungeon[row-<span class="number">1</span>][column-<span class="number">1</span>];</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//遍历右边界初始化</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=row-<span class="number">2</span>; i&gt;=<span class="number">0</span>; i--) &#123;</span><br><span class="line">            dp[i][column-<span class="number">1</span>] = dungeon[i][column-<span class="number">1</span>]&gt;=dp[i+<span class="number">1</span>][column-<span class="number">1</span>]-<span class="number">1</span> ? <span class="number">1</span> : dp[i+<span class="number">1</span>][column-<span class="number">1</span>]-dungeon[i][column-<span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//遍历下边界初始化</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=column-<span class="number">2</span>; i&gt;=<span class="number">0</span>; i--) &#123;</span><br><span class="line">            dp[row-<span class="number">1</span>][i] = dungeon[row-<span class="number">1</span>][i]&gt;=dp[row-<span class="number">1</span>][i+<span class="number">1</span>]-<span class="number">1</span> ? <span class="number">1</span> : dp[row-<span class="number">1</span>][i+<span class="number">1</span>]-dungeon[row-<span class="number">1</span>][i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> dpMin = <span class="number">0</span>;      <span class="comment">//下面数和右面数中的较小者</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=row-<span class="number">2</span>; i&gt;=<span class="number">0</span>; i--) &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=column-<span class="number">2</span>; j&gt;=<span class="number">0</span>; j--) &#123;</span><br><span class="line">                dpMin = Math.min(dp[i+<span class="number">1</span>][j],dp[i][j+<span class="number">1</span>]);     </span><br><span class="line">                dp[i][j] = Math.max(<span class="number">1</span>, dpMin-dungeon[i][j]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[<span class="number">0</span>][<span class="number">0</span>];        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/images/weixin.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -198,364 +338,122 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/07/20/动态规划/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/19/贪心算法/" class="archive-article-date">
-  	<time datetime="2019-07-19T08:24:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-19</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/07/19/贪心算法/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">贪心算法</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/19/贪心算法/">贪心算法</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">贪心</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/18/util/" class="archive-article-date">
-  	<time datetime="2019-07-18T12:34:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/18/util/">util</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">util</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/18/下一个排列/" class="archive-article-date">
-  	<time datetime="2019-07-17T16:30:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/18/下一个排列/">算法-下一个排列</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数组</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/16/mongodb/" class="archive-article-date">
-  	<time datetime="2019-07-16T06:15:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-16</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/16/mongodb/">mongodb</a>
-    </h1>
-  
+  <div id="gitment-ctn"></div> 
+<link rel="stylesheet" href="//imsun.github.io/gitment/style/default.css"> 
+<script src="//imsun.github.io/gitment/dist/gitment.browser.js"></script>
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">mongodb</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/14/dubbo/" class="archive-article-date">
-  	<time datetime="2019-07-14T02:05:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/14/dubbo/">dubbo</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">dubbo</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/12/spring-检索/" class="archive-article-date">
-  	<time datetime="2019-07-12T07:35:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/12/spring-检索/">spring-检索</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">springboot</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/09/springboot-消息/" class="archive-article-date">
-  	<time datetime="2019-07-09T12:49:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/09/springboot-消息/">springboot-消息</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">springboot</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/09/RabbitMQ/" class="archive-article-date">
-  	<time datetime="2019-07-09T07:40:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/09/RabbitMQ/">RabbitMQ</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">RabbitMQ</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/08/springboot-docker/" class="archive-article-date">
-  	<time datetime="2019-07-08T08:43:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-08</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/08/springboot-docker/">springboot-docker</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">springboot</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/2019/07/page/2/">2</a><a class="extend next" rel="next" href="/archives/2019/07/page/2/">Next &raquo;</a>
-    </nav>
+<script>
+var gitment = new Gitment({
+  id: "http://yoursite.com/2019/07/20/动态规划/",
+  owner: 'JiaFeiLee',
+  repo: 'https://github.com/JiaFeiLee/JiaFeiLee.github.io',
+  oauth: {
+    client_id: '51c5c9a5b66ebf689a36',
+    client_secret: '0dcad1ba2cdaf26b0906a54a37e7cef9359eefa6',
+  },
+})
+gitment.render('gitment-ctn')
+</script>
   
 
 
@@ -579,8 +477,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,

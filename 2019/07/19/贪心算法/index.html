@@ -6,19 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>下一个排列 | Hexo</title>
+  <title>贪心算法 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="java springboot">
+  <meta name="description" content="贪心法：遵循某种规律，不断贪心的选取当前最优策略的算法设计方法">
+<meta name="keywords" content="贪心">
 <meta property="og:type" content="article">
-<meta property="og:title" content="下一个排列">
-<meta property="og:url" content="http://yoursite.com/2019/07/18/算法-下一个排列/index.html">
+<meta property="og:title" content="贪心算法">
+<meta property="og:url" content="http://yoursite.com/2019/07/19/贪心算法/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="java springboot">
+<meta property="og:description" content="贪心法：遵循某种规律，不断贪心的选取当前最优策略的算法设计方法">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-07-17T16:30:26.272Z">
+<meta property="og:image" content="http://yoursite.com/images/%E8%B4%AA%E5%BF%83/01.png">
+<meta property="og:updated_time" content="2019-07-21T09:49:41.647Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="下一个排列">
-<meta name="twitter:description" content="java springboot">
+<meta name="twitter:title" content="贪心算法">
+<meta name="twitter:description" content="贪心法：遵循某种规律，不断贪心的选取当前最优策略的算法设计方法">
+<meta name="twitter:image" content="http://yoursite.com/images/%E8%B4%AA%E5%BF%83/01.png">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -158,27 +161,89 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-算法-下一个排列" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-贪心算法" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      下一个排列
+      贪心算法
     </h1>
   
 
         
-        <a href="/2019/07/18/算法-下一个排列/" class="archive-article-date">
-  	<time datetime="2019-07-17T16:30:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-18</time>
+        <a href="/2019/07/19/贪心算法/" class="archive-article-date">
+  	<time datetime="2019-07-19T08:24:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-19</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>贪心法：<mark>遵循某种规律，不断贪心的选取当前最优策略的算法设计方法</mark></p>
+<a id="more"></a>
+
+<h4 id="1-分糖果（easy）"><a href="#1-分糖果（easy）" class="headerlink" title="1.分糖果（easy）"></a>1.分糖果（easy）</h4><p><a href="https://leetcode-cn.com/problems/assign-cookies/" target="_blank" rel="noopener">力扣链接</a></p>
+<p>假设你是一位很棒的家长，想要给你的孩子们一些小饼干。但是，每个孩子最多只能给一块饼干。对每个孩子 i ，都有一个胃口值 gi ，这是能让孩子们满足胃口的饼干的最小尺寸；并且每块饼干 j ，都有一个尺寸 sj 。如果 sj &gt;= gi ，我们可以将这个饼干 j 分配给孩子 i ，这个孩子会得到满足。你的目标是尽可能满足越多数量的孩子，并输出这个最大数值。</p>
+<p><strong>示例</strong>：</p>
+<p>输入: [1,2,3], [1,1]</p>
+<p>输出: 1</p>
+<p>解释:<br>你有三个孩子和两块小饼干，3个孩子的胃口值分别是：1,2,3。<br>虽然你有两块小饼干，由于他们的尺寸都是1，你只能让胃口值是1的孩子满足。<br>所以你应该输出1。</p>
+<p>算法思路：<strong>1.对两个数组从小到大的循序进行排列</strong></p>
+<p>​                   <strong>2.按照顺序使用各个糖果对某个孩子是否能够进行满足，直到没有更多的孩子或没有更多的糖果，循环结束。</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findContentChildren</span><span class="params">(<span class="keyword">int</span>[] g, <span class="keyword">int</span>[] s)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//首先对两个数组排序,g为小朋友，s为饼干</span></span><br><span class="line">        Arrays.sort(g);</span><br><span class="line">        Arrays.sort(s);</span><br><span class="line">        <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;    <span class="comment">//孩子下标</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;s.length; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(i == g.length) <span class="keyword">break</span>;    <span class="comment">//不让数组越界</span></span><br><span class="line">            <span class="keyword">if</span>(s[j]&gt;=g[i]) &#123;   <span class="comment">//这块饼干可以满足</span></span><br><span class="line">                i++;</span><br><span class="line">                count++;</span><br><span class="line">            &#125; </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><mark><strong>贪心：先对需求小的孩子进行满足</strong></mark></p>
+<h4 id="2-摆动序列（medium）"><a href="#2-摆动序列（medium）" class="headerlink" title="2.摆动序列（medium）"></a>2.摆动序列（medium）</h4><p><a href="https://leetcode-cn.com/problems/wiggle-subsequence/" target="_blank" rel="noopener">力扣链接</a></p>
+<p>如果连续数字之间的差严格地在正数和负数之间交替，则数字序列称为摆动序列。第一个差（如果存在的话）可能是正数或负数。少于两个元素的序列也是摆动序列。</p>
+<p>例如， [1,7,4,9,2,5] 是一个摆动序列，因为差值 (6,-3,5,-7,3) 是正负交替出现的。相反, [1,4,7,2,5] 和 [1,7,4,5,5] 不是摆动序列，第一个序列是因为它的前两个差值都是正数，第二个序列是因为它的最后一个差值为零。</p>
+<p>给定一个整数序列，返回作为摆动序列的最长子序列的长度。 通过从原始序列中删除一些（也可以不删除）元素来获得子序列，剩下的元素保持其原始顺序。</p>
+<p>示例：</p>
+<p>输入: [1,7,4,9,2,5]<br>输出: 6<br>解释: 整个序列均为摆动序列。</p>
+<p><strong>当序列中出现一段递增或递减的序列是，为了形成最大摇摆子序列，需要选择递增或递减序列的首尾元素，这样的贪心做法更可能够是的尾部后一个元素能够成为摇摆子序列的下一个元素。</strong></p>
+<p><img src="/images/%E8%B4%AA%E5%BF%83/01.png" alt="01"></p>
+<p>配图来自山象学院</p>
+<p>使用了<strong>状态转换机</strong>来构建，思路更加清晰</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">wiggleMaxLength</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//少于两个元素，直接是摆动序列</span></span><br><span class="line">        <span class="keyword">if</span>(nums.length &lt; <span class="number">2</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> nums.length;        <span class="comment">//一个元素时为1，无元素时为0</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//利用转态机的思想，有begin，up，down三种状态</span></span><br><span class="line">        <span class="keyword">final</span> <span class="keyword">int</span> begin = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">final</span> <span class="keyword">int</span> up = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">final</span> <span class="keyword">int</span> down = <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">int</span> maxLength = <span class="number">1</span>;   <span class="comment">//子序列最大长度,初始值为起点一个1</span></span><br><span class="line">        <span class="keyword">int</span> state = begin;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;nums.length-<span class="number">1</span>; i++) &#123;  <span class="comment">//注意数组越界</span></span><br><span class="line">            <span class="keyword">switch</span>(state) &#123;</span><br><span class="line">                <span class="keyword">case</span> begin:   <span class="comment">//状态为开始</span></span><br><span class="line">                    <span class="keyword">if</span>(nums[i] &lt; nums[i+<span class="number">1</span>]) &#123;</span><br><span class="line">                        maxLength++;</span><br><span class="line">                        state = up;</span><br><span class="line">                    &#125; <span class="keyword">else</span> <span class="keyword">if</span>(nums[i] &gt; nums[i+<span class="number">1</span>]) &#123;</span><br><span class="line">                        maxLength++;</span><br><span class="line">                        state = down;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> up:      <span class="comment">//状态为上升</span></span><br><span class="line">                    <span class="keyword">if</span>(nums[i] &gt; nums[i+<span class="number">1</span>]) &#123;</span><br><span class="line">                        maxLength++;</span><br><span class="line">                        state = down;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> down:     <span class="comment">//状态为下降</span></span><br><span class="line">                    <span class="keyword">if</span>(nums[i] &lt; nums[i+<span class="number">1</span>]) &#123;</span><br><span class="line">                        maxLength++;</span><br><span class="line">                        state = up;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> maxLength;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><mark><strong>贪心：对连续的递增或递减子序列取最后一个元素保证后面元素的可摇摆</strong></mark></p>
+<h4 id="3-移除k个数字（medium）"><a href="#3-移除k个数字（medium）" class="headerlink" title="3.移除k个数字（medium）"></a>3.移除k个数字（medium）</h4><p><a href="https://leetcode-cn.com/problems/remove-k-digits" target="_blank" rel="noopener">力扣链接</a></p>
+<p>给定一个以字符串表示的非负整数 num，移除这个数中的 k 位数字，使得剩下的数字最小。</p>
+<p>注意:</p>
+<p>num 的长度小于 10002 且 ≥ k。<br>num 不会包含任何前导零。</p>
+<p>示例：</p>
+<p>输入: num = “1432219”, k = 3<br>输出: “1219”<br>解释: 移除掉三个数字 4, 3, 和 2 形成一个新的最小的数字 1219。</p>
+<p><strong>假设只移除一个数字，按照常识，从最高位往最高位进行扫描，如果后面一个数字小于当前数字，那么移除当前数字会得到少一位数的最小数。</strong></p>
+<p><strong>同理，进行k趟上述移除，由于每趟得到局部最小数，最后一定是最小数。但<mark>还可以进行栈的使用存储结果</mark>使得只进行一趟遍历</strong></p>
+<p><strong>使用栈时：将数字依次压入栈中，如果后面的数要小于栈顶的数，那么就将栈顶的元素弹出，直至到k个数字。当所有的数字都扫描完后，k依然是大于0时，从栈顶依次弹出对应数量的数字。当数字中有0特殊数字出现时将0若栈为空则忽略，扫描下一个数字。</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">removeKdigits</span><span class="params">(String num, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        Stack&lt;Integer&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();        <span class="comment">//定义存储元素的栈</span></span><br><span class="line">        StringBuilder result = <span class="keyword">new</span> StringBuilder(<span class="string">""</span>);        <span class="comment">//用来存储最后的结果</span></span><br><span class="line">        <span class="keyword">char</span>[] nums = num.toCharArray();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;nums.length; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> number = nums[i] - <span class="string">'0'</span>;        <span class="comment">//字符转化成数字</span></span><br><span class="line">            <span class="keyword">while</span>(!stack.empty() &amp;&amp; stack.peek()&gt;number &amp;&amp; k&gt;<span class="number">0</span>) &#123;    </span><br><span class="line">                stack.pop();                   <span class="comment">//弹出数字</span></span><br><span class="line">                k--;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(number != <span class="number">0</span> || !stack.empty()) &#123;    <span class="comment">//考虑到了数字0不能在栈底，当数字为100200，k为1时，1被弹出，00被忽略最后的数字为200</span></span><br><span class="line">                stack.push(number);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//考虑到遍历完还没有移完k个数字</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=k; i&gt;<span class="number">0</span>; i--) &#123;    </span><br><span class="line">            <span class="keyword">if</span>(!stack.empty()) &#123;          <span class="comment">//当输入的数字为10，k为2时，不进行栈是否为空的判断，会抛异常</span></span><br><span class="line">                stack.pop();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;stack.size(); i++) &#123;</span><br><span class="line">            result.append(stack.get(i));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(stack.size() == <span class="number">0</span>) &#123;   <span class="comment">//考虑栈为空时输出0字符串</span></span><br><span class="line">            result.append(<span class="number">0</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result.toString();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><mark><strong>贪心：每次移除一个数字目的都是将数变成最小数</strong></mark></p>
+<h4 id="4-跳跃游戏（medium）"><a href="#4-跳跃游戏（medium）" class="headerlink" title="4.跳跃游戏（medium）"></a>4.跳跃游戏（medium）</h4><p><a href="https://leetcode-cn.com/problems/jump-game/" target="_blank" rel="noopener">力扣链接</a></p>
+<p>给定一个非负整数数组，你最初位于数组的第一个位置。</p>
+<p>数组中的每个元素代表你在该位置可以跳跃的最大长度。</p>
+<p>判断你是否能够到达最后一个位置。</p>
+<p>示例：</p>
+<p>输入: [2,3,1,1,4]<br>输出: true<br>解释: 从位置 0 到 1 跳 1 步, 然后跳 3 步到达最后一个位置。</p>
+<p><strong>从第i个位置，最远可跳nums[i]步：nums=[2,3,1,1,4];从第i个位置，最远可跳至第index[i]个位置：</strong></p>
+<p><strong>index[i]=i+nums[i];index=[2,4,3,4,8],转化成index数组后可以利用贪心跳至index数组中最大的哪个位置。<mark>核心：在该位置下跳转到可跳范围内的最大index[i]值。</mark></strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">canJump</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//定义index</span></span><br><span class="line">        List&lt;Integer&gt; index = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="comment">//初始化index</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;nums.length; i++) &#123;</span><br><span class="line">            index.add(i + nums[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> jump = <span class="number">0</span>;           <span class="comment">//jump相当于代表的是数组的下标</span></span><br><span class="line">        <span class="keyword">int</span> maxIndex = index.get(<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">while</span>(jump&lt;index.size() &amp;&amp; jump&lt;=maxIndex) &#123;</span><br><span class="line">            <span class="keyword">if</span>(maxIndex &lt; index.get(jump)) &#123;</span><br><span class="line">                maxIndex =  index.get(jump);   <span class="comment">//更新最大索引</span></span><br><span class="line">            &#125;</span><br><span class="line">            jump++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(jump == index.size()) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><mark>贪心：取得局部范围内的最大的index[i] 值，打到该阶段的可达最远</mark></p>
+<h4 id="5-用最少数量的箭引爆气球"><a href="#5-用最少数量的箭引爆气球" class="headerlink" title="5.用最少数量的箭引爆气球"></a>5.用最少数量的箭引爆气球</h4><p><a href="https://leetcode-cn.com/problems/minimum-number-of-arrows-to-burst-balloons/" target="_blank" rel="noopener">力扣链接</a></p>
+<p>在二维空间中有许多球形的气球。对于每个气球，提供的输入是水平方向上，气球直径的开始和结束坐标。由于它是水平的，所以y坐标并不重要，因此只要知道开始和结束的x坐标就足够了。开始坐标总是小于结束坐标。平面内最多存在104个气球。</p>
+<p>一支弓箭可以沿着x轴从不同点完全垂直地射出。在坐标x处射出一支箭，若有一个气球的直径的开始和结束坐标为 xstart，xend， 且满足  xstart ≤ x ≤ xend，则该气球会被引爆。可以射出的弓箭的数量没有限制。 弓箭一旦被射出之后，可以无限地前进。我们想找到使得所有气球全部被引爆，所需的弓箭的最小数量。</p>
+<p>示例：</p>
+<p>输入:<br>[[10,16], [2,8], [1,6], [7,12]]</p>
+<p>输出:<br>2</p>
+<p>解释:<br>对于该样例，我们可以在x = 6（射爆[2,8],[1,6]两个气球）和 x = 11（射爆另外两个气球）。</p>
+<p><strong>首先，一个气球最少要用一只箭引爆，其次，在引爆一个气球的条件下尽可能地多引爆其它气球。根据常识，先从数轴左端往右扫描，确定最多气球引爆区间，根据所有气球的<mark>左端</mark>排列各个气球的位置，便于遍历。根据右端排列也行，考虑相应的情况就行</strong></p>
+<p>对数组遍历排序使用匿名类，</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findMinArrowShots</span><span class="params">(<span class="keyword">int</span>[][] points)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//当没有气球时</span></span><br><span class="line">        <span class="keyword">if</span>(points.length == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//对数组进行每个气球左端点比较排序</span></span><br><span class="line">        Arrays.sort(points,<span class="keyword">new</span> Comparator&lt;<span class="keyword">int</span> []&gt;()&#123;</span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(<span class="keyword">int</span>[] p1, <span class="keyword">int</span>[] p2)</span> </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> p1[<span class="number">0</span>] - p2[<span class="number">0</span>]; </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span>[] range = points[<span class="number">0</span>];       <span class="comment">//初始化人的射箭范围为第一个气球</span></span><br><span class="line">        <span class="keyword">int</span> people = <span class="number">1</span>;                <span class="comment">//定义初始化射箭人所需最少数量</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;points.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(points[i][<span class="number">0</span>] &lt;= range[<span class="number">1</span>]) &#123;              <span class="comment">//当下一个气球宽位置有重叠部分时，又分为两种情况</span></span><br><span class="line">                range[<span class="number">0</span>] = points[i][<span class="number">0</span>];</span><br><span class="line">                <span class="keyword">if</span>(points[i][<span class="number">1</span>] &lt; range[<span class="number">1</span>]) &#123;           <span class="comment">//第二种情况，完全包含</span></span><br><span class="line">                    range[<span class="number">1</span>] = points[i][<span class="number">1</span>];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;          <span class="comment">//射箭范围完全改变</span></span><br><span class="line">                people++;</span><br><span class="line">                range[<span class="number">0</span>] = points[i][<span class="number">0</span>];</span><br><span class="line">                range[<span class="number">1</span>] = points[i][<span class="number">1</span>];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> people;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><mark><strong>贪心：每次引爆气球是尽可能多的引爆其它球</strong></mark></p>
+
       
 
       
@@ -212,6 +277,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">贪心</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -262,7 +338,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/07/18/算法-下一个排列/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/07/19/贪心算法/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -276,18 +352,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/07/18/下一个排列/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/07/20/动态规划/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          算法-下一个排列
+          动态规划
         
       </div>
     </a>
   
   
-    <a href="/2019/07/16/mongodb/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">mongodb</div>
+    <a href="/2019/07/18/util/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">util</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -327,7 +403,7 @@
 
 <script>
 var gitment = new Gitment({
-  id: "http://yoursite.com/2019/07/18/算法-下一个排列/",
+  id: "http://yoursite.com/2019/07/19/贪心算法/",
   owner: 'JiaFeiLee',
   repo: 'https://github.com/JiaFeiLee/JiaFeiLee.github.io',
   oauth: {
@@ -442,15 +518,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">数组</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">springboot</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">springboot cache</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">数组</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -463,6 +539,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">动态规划</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">贪心</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">util</a>
               </li>
             
             <div class="clearfix"></div>

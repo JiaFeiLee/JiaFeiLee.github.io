@@ -6,24 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>dubbo | Hexo</title>
+  <title>MockMvc单元测试 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="什么是分布式系统">
-<meta name="keywords" content="dubbo">
+  <meta name="description" content="一.什么是MockMvc">
+<meta name="keywords" content="测试">
 <meta property="og:type" content="article">
-<meta property="og:title" content="dubbo">
-<meta property="og:url" content="http://yoursite.com/2019/07/14/dubbo/index.html">
+<meta property="og:title" content="MockMvc单元测试">
+<meta property="og:url" content="http://yoursite.com/2019/07/31/MockMvc单元测试/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="什么是分布式系统">
+<meta property="og:description" content="一.什么是MockMvc">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/images/dubbo/1.png">
-<meta property="og:image" content="http://yoursite.com/images/dubbo/2.png">
-<meta property="og:image" content="http://yoursite.com/images/dubbo/3.png">
-<meta property="og:updated_time" content="2019-07-17T01:31:25.177Z">
+<meta property="og:updated_time" content="2019-08-01T01:24:26.966Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="dubbo">
-<meta name="twitter:description" content="什么是分布式系统">
-<meta name="twitter:image" content="http://yoursite.com/images/dubbo/1.png">
+<meta name="twitter:title" content="MockMvc单元测试">
+<meta name="twitter:description" content="一.什么是MockMvc">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -163,160 +159,59 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-dubbo" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-MockMvc单元测试" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      dubbo
+      MockMvc单元测试
     </h1>
   
 
         
-        <a href="/2019/07/14/dubbo/" class="archive-article-date">
-  	<time datetime="2019-07-14T02:05:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-14</time>
+        <a href="/2019/07/31/MockMvc单元测试/" class="archive-article-date">
+  	<time datetime="2019-07-31T14:48:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-31</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="什么是分布式系统"><a href="#什么是分布式系统" class="headerlink" title="什么是分布式系统"></a>什么是分布式系统</h3><a id="more"></a>
+        <h3 id="一-什么是MockMvc"><a href="#一-什么是MockMvc" class="headerlink" title="一.什么是MockMvc"></a>一.什么是MockMvc</h3><a id="more"></a>
 
-<p>​        <strong>分布式系统是若干独立计算机的集合，这些计算机对于用户来说就像单个相关系统</strong>。分布式系统是建立在网络之上的软件系统</p>
-<p>​       <img src="/images/dubbo/1.png" alt="1"></p>
-<p>​       <mark>单一应用架构</mark>：将所有功能放在一个应用里面。缺点：拓展不容易，协同开发不容易，单台服务器压力大。</p>
-<p>​       <mark>垂直应用架构</mark>：将每个小应用（都是每个功能完整的）放在不同的服务器。缺点：界面web与业务逻辑的实现未分离，且应用会有交互。</p>
-<p>​       <mark>分布式服务架构</mark>：业务逻辑和页面放在不同的服务器，<strong>web RPC（远程过程调用）业务</strong>。缺点：访问压力没有实时分配</p>
-<p>​      <mark>流动计算架构</mark>：基于访问压力实时管理集群容量，提高集群利用率。</p>
-<h3 id="RPC基本原理"><a href="#RPC基本原理" class="headerlink" title="RPC基本原理"></a>RPC基本原理</h3><p>​       <img src="/images/dubbo/2.png" alt="2"></p>
-<p>​         <strong>服务提供者（Provider）</strong>：暴露服务的服务提供方，服务提供者在启动时，向注册中心注册自己提供的服务。</p>
-<p>​         <strong>服务消费者（Consumer）</strong>: 调用远程服务的服务消费方，服务消费者在启动时，向注册中心订阅自己所需的服务，服务消费者，从提供者地址列表中，基于软负载均衡算法，选一台提供者进行调用，如果调用失败，再选另一台调用。</p>
-<p>​         <strong>注册中心（Registry）</strong>：注册中心返回服务提供者地址列表给消费者，如果有变更，注册中心将基于长连接推送变更数据给消费者，如zookeeper。</p>
-<p>​         <strong>监控中心（Monitor）</strong>：服务消费者和提供者，在内存中累计调用次数和调用时间，定时每分钟发送一次统计数据到监控中心</p>
-<p>​       两个核心：1. 要建立起通信网络连接</p>
-<p>​                           2. 传输的数据过程中序列化和反序列化</p>
-<p>​       RPC框架：dubbo ,gRPC ,Thrift ,HSF</p>
-<h3 id="dubbo简介"><a href="#dubbo简介" class="headerlink" title="dubbo简介"></a>dubbo简介</h3><p>​       <a href="http://dubbo.apache.org/zh-cn/docs/user/quick-start.html" target="_blank" rel="noopener">官方文档</a></p>
-<p>​        Apache Dubbo (incubating) |ˈdʌbəʊ| 是一款高性能、轻量级的开源Java RPC框架，它提供了三大核心能力：<strong>面向接口的远程方法调用，智能容错和负载均衡，以及服务自动注册和发现。</strong></p>
-<p>​       框架：</p>
-<p>​       <img src="/images/dubbo/3.png" alt="3"></p>
-<p>​      dubbo本身并不是一个服务软件。它其实就是一个<strong>jar包能够帮你的java程序连接到zookeeper，并利用zookeeper消费、提供服务。</strong>所以你不用在Linux上启动什么dubbo服务。</p>
-<p>​      但是为了让用户更好的管理监控众多的dubbo服务，官方提供了一个可视化的监控程序，不过这个监控即使不装也不影响使用。</p>
-<h5 id="dubbo-admin管理控制台"><a href="#dubbo-admin管理控制台" class="headerlink" title="dubbo-admin管理控制台"></a>dubbo-admin管理控制台</h5><p>​       在github中dubbo中的dubbo-ops中下载dubbo-admin的安装包，是一个maven工程，在本地打包成jar包后执行jar包。启动的同时要启动zookeeper</p>
-<h5 id="dubbo-monitor-simple简单的监控中心"><a href="#dubbo-monitor-simple简单的监控中心" class="headerlink" title="dubbo-monitor-simple简单的监控中心"></a>dubbo-monitor-simple简单的监控中心</h5><p>​       在github中dubbo中的dubbo-ops中下载dubbo-monitor-simple的安装包，是一个maven工程，在本地打包成jar包后执行jar包。</p>
-<h3 id="dubbo入门程序"><a href="#dubbo入门程序" class="headerlink" title="dubbo入门程序"></a>dubbo入门程序</h3><p>​        1、分包</p>
-<p>​        建议将服务接口，服务模型，服务异常等均放在 API 包中，因为服务模型及异常也是 API 的一部分，同时，这样做也符合分包原则：重用发布等价原则(REP)，共同重用原则(CRP)。</p>
-<p>如果需要，也可以考虑在 API 包中放置一份 spring 的引用配置，这样使用方，只需在 spring 加载过程中引用此配置即可，配置建议放在模块的包目录下，以免冲突，如：com/alibaba/china/xxx/dubbo-reference.xml。</p>
-<p>​        2、粒度</p>
-<p>​        服务接口尽可能大粒度，每个服务方法应代表一个功能，而不是某功能的一个步骤，否则将面临分布式事务问题，Dubbo 暂未提供分布式事务支持。</p>
-<p>服务接口建议以业务场景为单位划分，并对相近业务做抽象，防止接口数量爆炸。</p>
-<p>不建议使用过于抽象的通用接口，如：Map query(Map)，这样的接口没有明确语义，会给后期维护带来不便。</p>
-<p>​        首先建立三个工程:</p>
-<ol>
-<li><p>gmall-interface：公共接口层（model，service，exception…）</p>
-</li>
-<li><p>gmall-user：用户模块（对用户接口的实现）</p>
-<ol start="3">
-<li><p>gmall-order-web：订单模块（调用用户模块）</p>
-<p>两个 模块调用公共接口层模块的pom配置</p>
-<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependencies&gt;</span><br><span class="line">    &lt;!-- 接口模块依赖的调用 --&gt;</span><br><span class="line">      	&lt;dependency&gt;</span><br><span class="line">      		&lt;groupId&gt;com.atguigu.dubbo&lt;/groupId&gt;</span><br><span class="line">      		&lt;artifactId&gt;gmall-interface&lt;/artifactId&gt;</span><br><span class="line">      		&lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;</span><br><span class="line">      	&lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">  	&lt;!-- 引入dubbo --&gt;</span><br><span class="line">		&lt;dependency&gt;</span><br><span class="line">			&lt;groupId&gt;com.alibaba&lt;/groupId&gt;</span><br><span class="line">			&lt;artifactId&gt;dubbo&lt;/artifactId&gt;</span><br><span class="line">			&lt;version&gt;2.6.2&lt;/version&gt;</span><br><span class="line">		&lt;/dependency&gt;</span><br><span class="line">	&lt;!-- 由于我们使用zookeeper作为注册中心，所以需要操作zookeeper</span><br><span class="line">dubbo 2.6以前的版本引入zkclient操作zookeeper </span><br><span class="line">dubbo 2.6及以后的版本引入curator操作zookeeper</span><br><span class="line">下面两个zk客户端根据dubbo版本2选1即可</span><br><span class="line">--&gt;</span><br><span class="line">		&lt;dependency&gt;</span><br><span class="line">			&lt;groupId&gt;com.101tec&lt;/groupId&gt;</span><br><span class="line">			&lt;artifactId&gt;zkclient&lt;/artifactId&gt;</span><br><span class="line">			&lt;version&gt;0.10&lt;/version&gt;</span><br><span class="line">		&lt;/dependency&gt;</span><br><span class="line">		&lt;!-- curator-framework --&gt;</span><br><span class="line">		&lt;dependency&gt;</span><br><span class="line">			&lt;groupId&gt;org.apache.curator&lt;/groupId&gt;</span><br><span class="line">			&lt;artifactId&gt;curator-framework&lt;/artifactId&gt;</span><br><span class="line">			&lt;version&gt;2.12.0&lt;/version&gt;</span><br><span class="line">		&lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line"> &lt;/dependencies&gt;</span><br></pre></td></tr></table></figure></code></pre></li>
-</ol>
-<p><strong>提供者配置文件</strong>，具体操作可参考官方文档：</p>
-</li>
-</ol>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--当前应用的名字  --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">dubbo:application</span> <span class="attr">name</span>=<span class="string">"gmall-user"</span>&gt;</span><span class="tag">&lt;/<span class="name">dubbo:application</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!--指定注册中心的地址，这里使用的是zookeeper，也可以使用其它  --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dubbo:registry</span> <span class="attr">address</span>=<span class="string">"zookeeper://118.24.44.169:2181"</span> /&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--使用dubbo协议，将服务暴露在20880端口  --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dubbo:protocol</span> <span class="attr">name</span>=<span class="string">"dubbo"</span> <span class="attr">port</span>=<span class="string">"20880"</span> /&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 指定需要暴露的服务，ref引用服务的实现--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dubbo:service</span> <span class="attr">interface</span>=<span class="string">"com.atguigu.gmall.service.UserService"</span> <span class="attr">ref</span>=<span class="string">"userServiceImpl"</span> /&gt;</span> </span><br><span class="line">    <span class="comment">&lt;!-- 监控中心协议，如果为protocol="registry"，表示从注册中心发现监控中心地址，否则直连监控中心 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">dubbo:monitor</span> <span class="attr">protocol</span>=<span class="string">"registry"</span>&gt;</span><span class="tag">&lt;/<span class="name">dubbo:monitor</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>​        在面向对象的程序设计中，模拟对象（英语：mock object）是以可控的方式模拟真实对象行为的假对象。在编程过程中，通常通过模拟一些输入数据，来验证程序是否达到预期结果。</p>
+<p>​        MockMvc是由spring-test包提供，<strong>实现了对Http请求的模拟</strong>，能够直接使用网络的形式，转换到Controller的调用，使得测试速度快、不依赖网络环境。同时提供了一套验证的工具，结果的验证十分方便。<strong>接口MockMvcBuilder，提供一个唯一的build方法，用来构造MockMvc</strong>。主要有两个实现：StandaloneMockMvcBuilder和DefaultMockMvcBuilder，分别对应两种测试方式，即独立安装和集成Web环境测试（并不会集成真正的web环境，而是通过相应的Mock   API进行模拟测试，无须启动服务器）。MockMvcBuilders提供了对应的创建方法standaloneSetup方法和webAppContextSetup方法，在使用时直接调用即可。</p>
+<h3 id="二-springboot中的使用"><a href="#二-springboot中的使用" class="headerlink" title="二.springboot中的使用"></a>二.springboot中的使用</h3><p>第一步：jar包引入。创建SpringBoot项目中默认引入的spring-boot-starter-test间接引入了spring-test，因此无需再额外引入jar包。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-test<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p><strong>消费者配置文件</strong></p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 应用名 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">dubbo:application</span> <span class="attr">name</span>=<span class="string">"gmall-order-web"</span>&gt;</span><span class="tag">&lt;/<span class="name">dubbo:application</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- 指定注册中心地址 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">dubbo:registry</span> <span class="attr">address</span>=<span class="string">"zookeeper://118.24.44.169:2181"</span> /&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- 生成远程服务代理，可以和本地bean一样使用demoService --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">dubbo:reference</span> <span class="attr">id</span>=<span class="string">"userService"</span> <span class="attr">interface</span>=<span class="string">"com.atguigu.gmall.service.UserService"</span>&gt;</span><span class="tag">&lt;/<span class="name">dubbo:reference</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 监控中心协议，如果为protocol="registry"，表示从注册中心发现监控中心地址，否则直连监控中心 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">dubbo:monitor</span> <span class="attr">protocol</span>=<span class="string">"registry"</span>&gt;</span><span class="tag">&lt;/<span class="name">dubbo:monitor</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>第二步：创建任意的controller类，并提供对应方法作为待测试的业务接口。例如</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/comment"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CommentController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    CommentService commentService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@PostMapping</span>(<span class="string">"/insertComplainComment"</span>)</span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Result <span class="title">insertComplainComment</span><span class="params">(@RequestBody ComplainComment complainComment)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> commentService.insertComplainComment(complainComment);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="dubbo配置"><a href="#dubbo配置" class="headerlink" title="dubbo配置"></a>dubbo配置</h3><ol>
-<li><p><strong>配置原则</strong></p>
-<p>JVM 启动 -D 参数优先，这样可以使用户在部署和启动时进行参数重写，比如在启动时需改变协议的端口。</p>
-<p>XML 次之，如果在 XML 中有配置，则 dubbo.properties 中的相应配置项无效。</p>
-<p>Properties 最后，相当于缺省值，只有 XML 没有配置时，dubbo.properties 的相应配置项才会生效，通常用于共享公共配置，比如应用名。</p>
-</li>
-<li><p><strong>重试次数</strong></p>
-<p><mark>失败自动切换，当出现失败，重试其它服务器，但重试会带来更长延迟。</mark>可通过 retries=”2” 来设置重试次数(不含第一次)。</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">重试次数配置如下：</span><br><span class="line"><span class="tag">&lt;<span class="name">dubbo:service</span> <span class="attr">retries</span>=<span class="string">"2"</span> /&gt;</span></span><br><span class="line">或</span><br><span class="line"><span class="tag">&lt;<span class="name">dubbo:reference</span> <span class="attr">retries</span>=<span class="string">"2"</span> /&gt;</span></span><br><span class="line">或</span><br><span class="line"><span class="tag">&lt;<span class="name">dubbo:reference</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dubbo:method</span> <span class="attr">name</span>=<span class="string">"findFoo"</span> <span class="attr">retries</span>=<span class="string">"2"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dubbo:reference</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>超时时间</strong></p>
-<p>​        由于网络或服务端不可靠，会导致调用出现一种不确定的中间状态（超时）。为了避免超时导致客户端资源（线程）挂起耗尽，必须设置超时时间。</p>
-<ol>
-<li><p>消费端</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">全局超时配置</span><br><span class="line"><span class="tag">&lt;<span class="name">dubbo:consumer</span> <span class="attr">timeout</span>=<span class="string">"5000"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">指定接口以及特定方法超时配置</span><br><span class="line"><span class="tag">&lt;<span class="name">dubbo:reference</span> <span class="attr">interface</span>=<span class="string">"com.foo.BarService"</span> <span class="attr">timeout</span>=<span class="string">"2000"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dubbo:method</span> <span class="attr">name</span>=<span class="string">"sayHello"</span> <span class="attr">timeout</span>=<span class="string">"3000"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dubbo:reference</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>第三步：编写测试类。实例化MockMvc有两种形式，一种是使用StandaloneMockMvcBuilder，另外一种是使用DefaultMockMvcBuilder。测试类及初始化MockMvc初始化：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> MockMvc mockMvc;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> WebApplicationContext webApplicationContext;</span><br><span class="line">    <span class="meta">@Before</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setup</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 实例化方式一</span></span><br><span class="line">        mockMvc = MockMvcBuilders.standaloneSetup(<span class="keyword">new</span> HelloWorldController()).build();</span><br><span class="line">        <span class="comment">// 实例化方式二</span></span><br><span class="line"><span class="comment">//        mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
+<p><strong>除此之外，还可以继承一个类，里面有@AutoConfigureMockMvc注解，该类可以是测试启动类：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RunWith</span>(SpringRunner.class)</span><br><span class="line"><span class="meta">@SpringBootTest</span></span><br><span class="line"><span class="meta">@WebAppConfiguration</span></span><br><span class="line"><span class="meta">@AutoConfigureMockMvc</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TelecomkshApplicationTests</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Test</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">contextLoads</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<p>用来测试的类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CommentControllerTest</span> <span class="keyword">extends</span> <span class="title">TelecomkshApplicationTests</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    MockMvc mvc;    <span class="comment">//自动注入MockMvc,应该是使用默认的实例化方式</span></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insertComplainComment</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        ComplainComment complainComment = <span class="keyword">new</span> ComplainComment();</span><br><span class="line">        complainComment.setContent(<span class="string">"测试投诉留言内容"</span>);</span><br><span class="line">        complainComment.setComplainTypeId(<span class="number">2</span>);</span><br><span class="line">        complainComment.setApplianceId((<span class="keyword">long</span>) <span class="number">1</span>);</span><br><span class="line">        String jsonString = JSONObject.toJSONString(complainComment);</span><br><span class="line">        String contentAsString = mvc.perform(</span><br><span class="line">                MockMvcRequestBuilders.post(<span class="string">"/comment/insertComplainComment"</span>)</span><br><span class="line">                        .contentType(MediaType.APPLICATION_JSON_UTF8)</span><br><span class="line">                        .content(jsonString)</span><br><span class="line">        ).andExpect(MockMvcResultMatchers.status().isOk())</span><br><span class="line">                .andReturn().getResponse().getContentAsString();</span><br><span class="line">        System.out.println(contentAsString);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-</li>
-</ol>
-</li>
-</ol>
-<pre><code>2. 服务端
-
-   <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">全局超时配置</span><br><span class="line"><span class="tag">&lt;<span class="name">dubbo:provider</span> <span class="attr">timeout</span>=<span class="string">"5000"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">指定接口以及特定方法超时配置</span><br><span class="line"><span class="tag">&lt;<span class="name">dubbo:provider</span> <span class="attr">interface</span>=<span class="string">"com.foo.BarService"</span> <span class="attr">timeout</span>=<span class="string">"2000"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dubbo:method</span> <span class="attr">name</span>=<span class="string">"sayHello"</span> <span class="attr">timeout</span>=<span class="string">"3000"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dubbo:provider</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-
-3. 配置原则
-
-   dubbo推荐在Provider上尽量多配置Consumer端属性：
-
-   ​       1、作服务的提供者，比服务使用方更清楚服务性能参数，如调用的超时时间，合理的重试次数，等等
-
-   ​       2、在配置后，不配置则会使用的配置值，即配置可以作为的缺省值。否则，会使用端的全局设置，这对于不可控的，并且往往是不合理的
-
-   1) 方法级配置别优于接口级别，即小Scope优先 
-
-   2) Consumer端配置 优于 Provider配置 优于 全局配置，
-
-   3) 最后是Dubbo Hard Code的配置值（见配置文档）</code></pre><ol start="4">
-<li><strong>版本号</strong></li>
-</ol>
-<p>​           当一个接口实现，出现不兼容升级时，可以用版本号过渡，版本号不同的服务相互间不引用。</p>
-<p>可以按照以下的步骤进行版本迁移：</p>
-<p>​            在低压力时间段，先升级一半提供者为新版本</p>
-<p>​            再将所有消费者升级为新版本</p>
-<p>​            然后将剩下的一半提供者升级为新版本</p>
-<h3 id="高可用"><a href="#高可用" class="headerlink" title="高可用"></a>高可用</h3><ol>
-<li><p><strong>zookeeper宕机与dubbo直连</strong></p>
-<p>现象：zookeeper注册中心宕机，还可以消费dubbo暴露的服务。</p>
-<p>l  监控中心宕掉不影响使用，只是丢失部分采样数据</p>
-<p>l  数据库宕掉后，注册中心仍能通过缓存提供服务列表查询，但不能注册新服务</p>
-<p>l  注册中心对等集群，任意一台宕掉后，将自动切换到另一台</p>
-<p>l  <mark><strong>注册中心全部宕掉后，服务提供者和服务消费者仍能通过本地缓存通讯</strong></mark></p>
-<p>l  服务提供者无状态，任意一台宕掉后，不影响使用</p>
-<p>l  服务提供者全部宕掉后，服务消费者应用将无法使用，并无限次重连等待服务提供者恢复</p>
-</li>
-<li><p><strong>集群下dubbo负债均衡配置</strong></p>
-<p><strong>Random LoadBalance</strong></p>
-<p>随机，按权重设置随机概率。</p>
-<p>在一个截面上碰撞的概率高，但调用量越大分布越均匀，而且按概率使用权重后也比较均匀，有利于动态调整提供者权重。</p>
-<p><strong>RoundRobin LoadBalance</strong></p>
-<p>轮循，按公约后的权重设置轮循比率。</p>
-<p>存在慢的提供者累积请求的问题，比如：第二台机器很慢，但没挂，当请求调到第二台时就卡在那，久而久之，所有请求都卡在调到第二台上。</p>
-<p><strong>LeastActive LoadBalance</strong></p>
-<p>最少活跃调用数，相同活跃数的随机，活跃数指调用前后计数差。</p>
-<p>使慢的提供者收到更少请求，因为越慢的提供者的调用前后计数差会越大。</p>
-<p><strong>ConsistentHash LoadBalance</strong></p>
-<p>一致性 Hash，相同参数的请求总是发到同一提供者。</p>
-<p>当某一台提供者挂时，原本发往该提供者的请求，基于虚拟节点，平摊到其它提供者，不会引起剧烈变动。算法参见：<a href="http://en.wikipedia.org/wiki/Consistent_hashing" target="_blank" rel="noopener">http://en.wikipedia.org/wiki/Consistent_hashing</a></p>
-<p>缺省只对第一个参数 Hash，如果要修改，请配置 &lt;dubbo:parameter key=”hash.arguments” value=”0,1” /&gt;</p>
-<p>缺省用 160  &lt;dubbo:parameter key=”hash.nodes” value=”320” /&gt;</p>
-</li>
-<li><p><strong>整合hystrix，服务熔断与降级处理</strong></p>
-</li>
-</ol>
-<p>​         1. <strong>服务降级</strong></p>
-<p>​         什么是服务降级？</p>
-<p>​        当服务器压力剧增的情况下，根据实际业务情况及流量，对<strong>一些服务和页面有策略的不处理或换种简单的方式处理，</strong>从而释放服务器资源以保证核心交易正常运作或高效运作。</p>
-<p>​         2. <strong>集群容错</strong></p>
-<p>​         <strong>Failover Cluster</strong></p>
-<p>失败自动切换，当出现失败，重试其它服务器。通常用于读操作，但重试会带来更长延迟。可通过 retries=”2” 来设置重试次数(不含第一次)。</p>
-<p>​         …..</p>
-<p>​         3. <strong>整合hystrix</strong></p>
+<p><mark><strong>1.MockMvcRequestBuilders主要API</strong></mark></p>
+<p><strong>MockHttpServletRequestBuilder get(String urlTemplate, Object…  urlVariables)：根据uri模板和uri变量值得到一个GET请求方式的MockHttpServletRequestBuilder；如get(/user/{id},  1L)；</strong><br><strong>MockHttpServletRequestBuilder post(String urlTemplate, Object… urlVariables)：同get类似，但是是POST方法；</strong><br>MockHttpServletRequestBuilder put(String urlTemplate, Object… urlVariables)：同get类似，但是是PUT方法；<br>MockHttpServletRequestBuilder delete(String urlTemplate, Object… urlVariables) ：同get类似，但是是DELETE方法；<br>MockHttpServletRequestBuilder options(String urlTemplate, Object… urlVariables)：同get类似，但是是OPTIONS方法；<br>MockHttpServletRequestBuilder  request(HttpMethod httpMethod, String urlTemplate, Object…  urlVariables)： 提供自己的Http请求方法及uri模板和uri变量，如上API都是委托给这个API；<br>MockMultipartHttpServletRequestBuilder  fileUpload(String urlTemplate, Object…  urlVariables)：提供文件上传方式的请求，得到MockMultipartHttpServletRequestBuilder；<br>RequestBuilder asyncDispatch(final MvcResult mvcResult)：创建一个从启动异步处理的请求的MvcResult进行异步分派的RequestBuilder；</p>
+<p><mark><strong>2.MockHttpServletRequestBuilder和MockMultipartHttpServletRequestBuilder API</strong></mark></p>
+<p><strong>(1)MockHttpServletRequestBuilder API</strong></p>
+<p>MockHttpServletRequestBuilder header(String name, Object…  values)/MockHttpServletRequestBuilder headers(HttpHeaders  httpHeaders)：添加头信息；<br><strong>MockHttpServletRequestBuilder contentType(MediaType mediaType)：指定请求的contentType头信息；</strong><br>MockHttpServletRequestBuilder  accept(MediaType… mediaTypes)/MockHttpServletRequestBuilder  accept(String… mediaTypes)：指定请求的Accept头信息；<br><strong>MockHttpServletRequestBuilder content(byte[] content)/MockHttpServletRequestBuilder content(String content)：指定请求Body体内容；</strong><br>MockHttpServletRequestBuilder cookie(Cookie… cookies)：指定请求的Cookie；<br>MockHttpServletRequestBuilder locale(Locale locale)：指定请求的Locale；<br>MockHttpServletRequestBuilder characterEncoding(String encoding)：指定请求字符编码；<br>MockHttpServletRequestBuilder requestAttr(String name, Object value) ：设置请求属性数据；<br>MockHttpServletRequestBuilder  sessionAttr(String name, Object value)/MockHttpServletRequestBuilder  sessionAttrs(Map&lt;string, object=””&gt;  sessionAttributes)：设置请求session属性数据；<br>MockHttpServletRequestBuilder  flashAttr(String name, Object value)/MockHttpServletRequestBuilder  flashAttrs(Map&lt;string, object=””&gt;  flashAttributes)：指定请求的flash信息，比如重定向后的属性信息；<br>MockHttpServletRequestBuilder session(MockHttpSession session) ：指定请求的Session；<br>MockHttpServletRequestBuilder principal(Principal principal) ：指定请求的Principal；<br>MockHttpServletRequestBuilder contextPath(String contextPath) ：指定请求的上下文路径，必须以“/”开头，且不能以“/”结尾；<br>MockHttpServletRequestBuilder pathInfo(String pathInfo) ：请求的路径信息，必须以“/”开头；<br>MockHttpServletRequestBuilder secure(boolean secure)：请求是否使用安全通道；<br>MockHttpServletRequestBuilder with(RequestPostProcessor postProcessor)：请求的后处理器，用于自定义一些请求处理的扩展点；</p>
+<p>(2)<strong>MockMultipartHttpServletRequestBuilder</strong>继承自MockHttpServletRequestBuilder，又提供了如下API</p>
+<p>MockMultipartHttpServletRequestBuilder file(String name, byte[]  content)/MockMultipartHttpServletRequestBuilder file(MockMultipartFile  file)：指定要上传的文件；</p>
+<p><mark>3.<strong>ResultActions</strong></mark></p>
+<p>调用MockMvc.perform(RequestBuilder requestBuilder)后将得到ResultActions，通过ResultActions完成如下三件事：<br><strong>ResultActions andExpect(ResultMatcher matcher) ：添加验证断言来判断执行请求后的结果是否是预期的；</strong><br>ResultActions andDo(ResultHandler handler) ：添加结果处理器，用于对验证成功后执行的动作，如输出下请求/结果信息用于调试；<br><strong>MvcResult andReturn() ：返回验证成功后的MvcResult；用于自定义验证/下一步的异步处理；</strong></p>
+<p><mark><strong>4.ResultMatcher/MockMvcResultMatchers</strong></mark></p>
+<p>1.ResultMatcher用来匹配执行完请求后的结果验证，其就一个match(MvcResult  result)断言方法，如果匹配失败将抛出相应的异常；spring  mvc测试框架提供了很多<strong><em>ResultMatchers来满足测试需求。注意这些</em></strong>ResultMatchers并不是ResultMatcher的子类，而是返回ResultMatcher实例的。Spring  mvc测试框架为了测试方便提供了MockMvcResultMatchers静态工厂方法方便操作；</p>
+<p>2.具体的API如下：<br>HandlerResultMatchers handler()：请求的Handler验证器，比如验证处理器类型/方法名；此处的Handler其实就是处理请求的控制器；<br>RequestResultMatchers request()：得到RequestResultMatchers验证器；<br>ModelResultMatchers model()：得到模型验证器；<br>ViewResultMatchers view()：得到视图验证器；<br>FlashAttributeResultMatchers flash()：得到Flash属性验证；<br><strong>StatusResultMatchers status()：得到响应状态验证器；</strong><br>HeaderResultMatchers header()：得到响应Header验证器；<br>CookieResultMatchers cookie()：得到响应Cookie验证器；<br>ContentResultMatchers content()：得到响应内容验证器；<br>JsonPathResultMatchers  jsonPath(String expression, Object … args)/ResultMatcher  jsonPath(String expression, Matcher matcher)：得到Json表达式验证器；<br>XpathResultMatchers  xpath(String expression, Object… args)/XpathResultMatchers  xpath(String expression, Map&lt;string, string=””&gt; namespaces,  Object… args)：得到Xpath表达式验证器；<br>ResultMatcher forwardedUrl(final String expectedUrl)：验证处理完请求后转发的url（绝对匹配）；<br>ResultMatcher forwardedUrlPattern(final String urlPattern)：验证处理完请求后转发的url（Ant风格模式匹配，@since spring4）；<br>ResultMatcher redirectedUrl(final String expectedUrl)：验证处理完请求后重定向的url（绝对匹配）；<br>ResultMatcher redirectedUrlPattern(final String expectedUrl)：验证处理完请求后重定向的url（Ant风格模式匹配，@since spring4）；</p>
+<h3 id="三-参考文章"><a href="#三-参考文章" class="headerlink" title="三.参考文章"></a>三.参考文章</h3><p><a href="https://www.cnblogs.com/lyy-2016/p/6122144.html" target="_blank" rel="noopener">SpringMVC 测试 mockMVC</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/61342833" target="_blank" rel="noopener">SpringBoot基础之MockMvc单元测试</a></p>
 
       
 
@@ -356,7 +251,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">dubbo</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">测试</a>
         		</li>
       		
 		</ul>
@@ -412,7 +307,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/07/14/dubbo/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/07/31/MockMvc单元测试/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -426,18 +321,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/07/16/mongodb/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/08/02/单点登录/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          mongodb
+          单点登录
         
       </div>
     </a>
   
   
-    <a href="/2019/07/12/spring-检索/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">spring-检索</div>
+    <a href="/2019/07/27/Transaction注解解析/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">@Transaction注解解析</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -477,7 +372,7 @@
 
 <script>
 var gitment = new Gitment({
-  id: "http://yoursite.com/2019/07/14/dubbo/",
+  id: "http://yoursite.com/2019/07/31/MockMvc单元测试/",
   owner: 'JiaFeiLee',
   repo: 'https://github.com/JiaFeiLee/JiaFeiLee.github.io',
   oauth: {

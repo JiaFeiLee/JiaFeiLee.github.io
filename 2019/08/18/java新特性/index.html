@@ -6,18 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: 架构 | Hexo</title>
+  <title>java新特性 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="java springboot">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/tags/架构/index.html">
+  <meta name="description" content="1.java8新特性">
+<meta name="keywords" content="java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java新特性">
+<meta property="og:url" content="http://yoursite.com/2019/08/18/java新特性/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="java springboot">
+<meta property="og:description" content="1.java8新特性">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-08-19T08:45:17.657Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
-<meta name="twitter:description" content="java springboot">
+<meta name="twitter:title" content="java新特性">
+<meta name="twitter:description" content="1.java8新特性">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -157,60 +159,264 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-java新特性" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/02/单点登录/" class="archive-article-date">
-  	<time datetime="2019-08-02T02:49:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-02</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/02/单点登录/">单点登录</a>
+    <h1 class="article-title" itemprop="name">
+      java新特性
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/08/18/java新特性/" class="archive-article-date">
+  	<time datetime="2019-08-18T11:55:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="1-java8新特性"><a href="#1-java8新特性" class="headerlink" title="1.java8新特性"></a>1.java8新特性</h4><a id="more"></a>                                                                                                                                      
+
+<p>1.1 接口的默认方法                                    </p>
+<p>​        Java 8允许我们给接口添加一个非抽象的方法实现，只需要使用 <strong>default</strong>关键字即可，这个特征又叫做扩展方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Formula</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">calculate</span><span class="params">(<span class="keyword">int</span> a)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">default</span> <span class="keyword">double</span> <span class="title">sqrt</span><span class="params">(<span class="keyword">int</span> a)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Math.sqrt(a);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Formula formula = <span class="keyword">new</span> Formula() &#123;  <span class="comment">//匿名类</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">calculate</span><span class="params">(<span class="keyword">int</span> a)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> sqrt(a * <span class="number">100</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">formula.calculate(<span class="number">100</span>);     <span class="comment">// 100.0</span></span><br><span class="line">formula.sqrt(<span class="number">16</span>);           <span class="comment">// 4.0</span></span><br></pre></td></tr></table></figure>
+
+<p>1.2 Lambda 表达式</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//老版本排列字符串</span></span><br><span class="line">List&lt;String&gt; names = Arrays.asList(<span class="string">"peter"</span>, <span class="string">"anna"</span>, <span class="string">"mike"</span>, <span class="string">"xenia"</span>);</span><br><span class="line">Collections.sort(names, <span class="keyword">new</span> Comparator&lt;String&gt;() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(String a, String b)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> b.compareTo(a);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//简洁写法</span></span><br><span class="line">Collections.sort(names, (String a, String b) -&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> b.compareTo(a);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>1.3 函数式接口（具有一个方法的接口）</p>
+<p>​        我们可以将lambda表达式当作任意只包含<strong>一个抽象方法</strong>的接口类型，<strong>确保你的接口一定达到这个要求，你只需要给你的接口添加 @FunctionalInterface 注解，编译器如果发现你标注了这个注解的接口有多于一个抽象方法的时候会报错的。</strong>多个抽象方法是不能表示成Lambda表达式的</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@FunctionalInterface</span></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Converter</span>&lt;<span class="title">F</span>, <span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="function">T <span class="title">convert</span><span class="params">(F from)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line">Converter&lt;String, Integer&gt; converter = (from) -&gt; Integer.valueOf(from);</span><br><span class="line">Integer converted = converter.convert(<span class="string">"123"</span>);</span><br><span class="line">System.out.println(converted);    <span class="comment">// 123</span></span><br></pre></td></tr></table></figure>
+
+<p>1.4 方法与构造函数引用</p>
+<p>​        我们可以直接通过方法引用来简写lambda表达式中已经存在的方法。提供了一种引用而不执行方法的方式。</p>
+<p>​        <a href="https://www.cnblogs.com/xiaoxi/p/7099667.html" target="_blank" rel="noopener">学习连接</a></p>
+<p>1.5. Stream</p>
+<p><a href="https://www.cnblogs.com/Finley/p/7502580.html" target="_blank" rel="noopener">Java8 Stream简介</a></p>
+<p>1.6 Optional类</p>
+<p>​      Optional 类是一个可以为null的容器对象，它可以保存类型T的值，或者仅仅保存null。值存在isPresent（）方法会返回true，调用get（）方法会返回该对象。这样就不需要控制检测</p>
+<p>1.7 Nashorn引擎</p>
+<p>​       是一个javascript引擎</p>
+<p>1.8 日期时间API</p>
+<p>​       java7日期时间api存在的问题：非线程安全，设计很差，时区处理麻烦</p>
+<p>​      java8提供了一些新的api：</p>
+<p> <strong>Clock</strong>:</p>
+<p>​        Clock时钟类，可以用此类来获取当前的毫秒数，使用millis方法。需要注意的是，Clock是像正常的时钟一样是时刻在变动的，也就是说不同时刻调用millis方法，返回的都是调用时刻的毫秒数，相当于调用的System.currentTimeMillis方法。所以可以用millis方法来替换currentTimeMillis的用法。如下所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Clock clock = Clock.systemDefaultZone();</span><br><span class="line">System.out.println(clock.millis());</span><br><span class="line">Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">System.out.println(clock.millis());</span><br></pre></td></tr></table></figure>
+
+<p><strong>Instant</strong>:</p>
+<p>​        Instant表示特定的某个时刻，一经创建就确定下来了，不会再改变。通过调用toEpochMilli方法，也可以获得毫秒数。</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Clock clock = Clock.systemDefaultZone();</span><br><span class="line"></span><br><span class="line"><span class="comment">//当前时刻Instant</span></span><br><span class="line">Instant instant = Instant.now();</span><br><span class="line">System.out.println(instant.toEpochMilli());</span><br><span class="line">Thread.sleep(<span class="number">1000</span>);<span class="comment">//不会影响输出结果</span></span><br><span class="line">System.out.println(instant.toEpochMilli());</span><br><span class="line"></span><br><span class="line"><span class="comment">//通过时钟创建当前时刻，虽然时钟对象是在之前创建，但它创建的Instant也是当前时刻</span></span><br><span class="line">instant = clock.instant();</span><br><span class="line">System.out.println(instant.toEpochMilli());</span><br><span class="line"></span><br><span class="line"><span class="comment">//使用毫秒数构建Instant</span></span><br><span class="line">instant = Instant.ofEpochMilli(<span class="number">1506310760160L</span>);</span><br><span class="line">System.out.println(instant.toEpochMilli());</span><br></pre></td></tr></table></figure>
+
+<p><strong>LocalDate</strong>:</p>
+<p>​         表示一个日期，通常格式为year-month-day。通过此类我们可以获得一些和当天有关的日期属性</p>
+<p><strong>LocalTime</strong>:</p>
+<p>​        表示一个时间，通常格式为：hour-minute-second.可以获得当前时分秒等属性。</p>
+<p><strong>LocalDateTIme</strong>:</p>
+<p>​       LocalDateTime是LocalDate和LocalTime的整合体，表示日期和时间。通常格式为：year-month-day-hour-minute-second。包含了LocalDate和LocalTime的常用方法，并且可以相互转换。</p>
+<p><strong>Duration</strong>:</p>
+<p>​       Duration用来表示两个日期之间的间隔（单位分钟）。可计算LocalDateTime，LocalTime和Instant表示的时间之间的间隔。值得注意的LocalDate不在其行列，因为LocalDate并没有精确到分钟，所以没有办法计算。</p>
+<p>1.9 base64</p>
+<p>​      <em>Base64</em>是一种二进制到文本编码方案，通过将二进制数据转换为基数-64表示，以可打印的ASCII字符串格式表示二进制数据。每个Base64数字恰好代表6位二进制数据。</p>
+<p>​       Base64用于防止数据在传输过程中通过信息系统（例如电子邮件）进行修改，这些信息系统可能不是8-bit clean（它们可能是8位值）。例如，您将图像附加到电子邮件消息，并希望图像到达另一端而不会出现乱码。您的电子邮件软件对图像进行Base64编码并将等效文本插入到邮件中。收件人的电子邮件软件将对编码的文本图像进行Base64解码，以恢复原始二进制图像。</p>
+<p>1)Basic编码：是标准的BASE64编码，用于处理常规的需求</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 编码</span></span><br><span class="line">String asB64 = Base64.getEncoder().encodeToString(<span class="string">"some string"</span>.getBytes(<span class="string">"utf-8"</span>));</span><br><span class="line">System.out.println(asB64); <span class="comment">// 输出为: c29tZSBzdHJpbmc=</span></span><br><span class="line"><span class="comment">// 解码</span></span><br><span class="line"><span class="keyword">byte</span>[] asBytes = Base64.getDecoder().decode(<span class="string">"c29tZSBzdHJpbmc="</span>);</span><br><span class="line">System.out.println(<span class="keyword">new</span> String(asBytes, <span class="string">"utf-8"</span>)); <span class="comment">// 输出为: some string</span></span><br></pre></td></tr></table></figure>
+
+<p>2)URL编码：使用下划线替换URL里面的反斜线“/”</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String urlEncoded = Base64.getUrlEncoder().encodeToString(<span class="string">"subjects?abcd"</span>.getBytes(<span class="string">"utf-8"</span>));</span><br><span class="line">System.out.println(<span class="string">"Using URL Alphabet: "</span> + urlEncoded);</span><br><span class="line"><span class="comment">// 输出为:</span></span><br><span class="line">Using URL Alphabet: c3ViamVjdHM_YWJjZA==</span><br></pre></td></tr></table></figure>
+
+<p>3)MIME编码：使用基本的字母数字产生BASE64输出，而且对MIME格式友好：每一行输出不超过76个字符，而且每行以“\r\n”符结束。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">StringBuilder sb = <span class="keyword">new</span> StringBuilder();</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> t = <span class="number">0</span>; t &lt; <span class="number">10</span>; ++t) &#123;</span><br><span class="line"> sb.append(UUID.randomUUID().toString());</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">byte</span>[] toEncode = sb.toString().getBytes(<span class="string">"utf-8"</span>);</span><br><span class="line">String mimeEncoded = Base64.getMimeEncoder().encodeToString(toEncode);</span><br><span class="line">System.out.println(mimeEncoded);</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-java9新特性"><a href="#2-java9新特性" class="headerlink" title="2.java9新特性"></a>2.java9新特性</h4><p>1.目录结构 </p>
+<p>2.repl工具 jShell命令 </p>
+<p>3.模块化 </p>
+<p>4.多版本兼容jar包 </p>
+<p>5.接口方法的改进（在接口中 jdk7 只能声明全名常量和抽象方法 jdk8 添加了静态方法和默认方法 jdk9添加了私有方法）</p>
+<p>6.钻石操作符升级 可以有{} </p>
+<p>7.异常处理try升级 </p>
+<p>8.下划线标识符命名的限制 _ 不允许了 </p>
+<p>9.String底层存储结构的变更（char数组变成byte字节数组） </p>
+<p>10.增强了Stream API(在java8基础上，新增加4个方法) </p>
+<p>11.jdk9 中引入httpClient api 代替原有的HttpURLConnection</p>
+<p><a href="http://www.sohu.com/a/224056171_827544" target="_blank" rel="noopener">文章连接</a></p>
+<h4 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h4><p><a href="https://zhuanlan.zhihu.com/p/64708955" target="_blank" rel="noopener">JAVA8十大新特性详解</a></p>
+<p><a href="https://blog.csdn.net/maosijunzi/article/details/78086512" target="_blank" rel="noopener">java8时间api</a></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/images/weixin.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">架构</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/08/18/java新特性/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2019/08/20/mysql高级简述/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          mysql高级简述
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2019/08/16/搜索/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">搜索</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
+  <div id="gitment-ctn"></div> 
+<link rel="stylesheet" href="//imsun.github.io/gitment/style/default.css"> 
+<script src="//imsun.github.io/gitment/dist/gitment.browser.js"></script>
+
+<script>
+var gitment = new Gitment({
+  id: "http://yoursite.com/2019/08/18/java新特性/",
+  owner: 'JiaFeiLee',
+  repo: 'https://github.com/JiaFeiLee/JiaFeiLee.github.io',
+  oauth: {
+    client_id: '51c5c9a5b66ebf689a36',
+    client_secret: '0dcad1ba2cdaf26b0906a54a37e7cef9359eefa6',
+  },
+})
+gitment.render('gitment-ctn')
+</script>
+  
 
 
           </div>
@@ -235,9 +441,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: true,
 		toc_hide_index: true,

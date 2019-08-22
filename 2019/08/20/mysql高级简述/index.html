@@ -6,18 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: 架构 | Hexo</title>
+  <title>mysql高级简述 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="java springboot">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/tags/架构/index.html">
+  <meta name="description" content="1.高级mysql内容">
+<meta name="keywords" content="mysql">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mysql高级简述">
+<meta property="og:url" content="http://yoursite.com/2019/08/20/mysql高级简述/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="java springboot">
+<meta property="og:description" content="1.高级mysql内容">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/images/mysql%E9%AB%98%E7%BA%A7%E7%AE%80%E8%BF%B0/1.png">
+<meta property="og:updated_time" content="2019-08-22T01:02:07.113Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
-<meta name="twitter:description" content="java springboot">
+<meta name="twitter:title" content="mysql高级简述">
+<meta name="twitter:description" content="1.高级mysql内容">
+<meta name="twitter:image" content="http://yoursite.com/images/mysql%E9%AB%98%E7%BA%A7%E7%AE%80%E8%BF%B0/1.png">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -157,60 +161,288 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-mysql高级简述" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/02/单点登录/" class="archive-article-date">
-  	<time datetime="2019-08-02T02:49:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-02</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/02/单点登录/">单点登录</a>
+    <h1 class="article-title" itemprop="name">
+      mysql高级简述
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/08/20/mysql高级简述/" class="archive-article-date">
+  	<time datetime="2019-08-20T01:10:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="1-高级mysql内容"><a href="#1-高级mysql内容" class="headerlink" title="1.高级mysql内容"></a>1.高级mysql内容</h4><a id="more"></a>
+
+<p>mysql内核，sql优化工程狮，mysql服务器优化，各种参数常量设定，查询语句优化，主从复制，软硬件升级，容灾备份，sql编程</p>
+<h4 id="2-存储引擎"><a href="#2-存储引擎" class="headerlink" title="2.存储引擎"></a>2.存储引擎</h4><p>InnoDB: 支持事务，行锁，外键，对内存的要求较高，关注点是事务。</p>
+<p>MyISAM: 不支持外键，事务，是表锁，不适合高并发，只缓存索引，不缓存数据，关注点是性能</p>
+<p>单值索引：一个索引包含一个列</p>
+<p>复合索引：一个索引包含多个列</p>
+<h4 id="3-常见的Join查询"><a href="#3-常见的Join查询" class="headerlink" title="3.常见的Join查询"></a>3.常见的Join查询</h4><ol>
+<li><p><strong>sql执行顺序：</strong></p>
+<p>​      手写：从前到后</p>
+<p>​      机读：从from开始</p>
+<p>​                     </p>
+</li>
+<li><p><strong>SQL JOINS:</strong></p>
+<p>left join:  左表独有 + 左右表共有</p>
+<p>right join：右表独有 + 左右表共有</p>
+<p>inner join：左右表共有</p>
+<p>left join + where 右表.key is null: 左表独有</p>
+<p>right join + where 左表.key is null: 右表独有</p>
+<p>full outer join:  左表独有 + 左右表共有 + 右表独有</p>
+<p>full outer join + where 左表.key is null or 右表.key is null:  左表独有</p>
+</li>
+</ol>
+<h4 id="4-索引解析"><a href="#4-索引解析" class="headerlink" title="4.索引解析"></a>4.索引解析</h4><p>​        索引（Index）是帮组Mysql高效获取数据的<mark><strong>数据结构</strong></mark>，索引的目的在于提高查询效率，可以类比字典。<mark><strong>排好序的快速查找</strong>数据结构</mark>, 这些数据结构以某种方式引用（指向）数据，这样就可以在这些数据结构上实现高级查找算法。这种数据结构，就是索引。</p>
+<p>​       例如维护一个二叉查找数，每个节点分别包含索引键值和一个指向对应数据记录物理地址的指针。</p>
+<p>​      索引本身也很大，不可能全部存储在内存中，因此索引往往以索引文件的形式存储在磁盘上。</p>
+<p>索引的优势：<strong>提高数据检索的效率，降低数据库的IO成本</strong></p>
+<p>​                       <strong>通过索引对数据进行排序，降低数据库排序的成本，降低了CPU的消耗</strong></p>
+<p>索引的劣势：<strong>实际上索引也是一张表，保存了字段的值与指向记录，也是要占一定空间的。虽然索引提高了查找效率，但是会降低insert，update，delete效率，因为每次sql操作时，要调整变化后的索引信息。</strong></p>
+<p>索引的分类：单值索引：一个索引只包含一个列</p>
+<p>​                       唯一索引：索引指向的列只能是唯一的，例如主键</p>
+<p>​                       复合索引：一个索引可以包含多个列</p>
+<p>​                      create [unique] index indexName on mytable (columnname(length));</p>
+<p>mysql索引结构：BTree索引（主要）</p>
+<p>​                              Hash索引</p>
+<p>​                              full-text全文索引</p>
+<p>​                              R-tree索引</p>
+<p>需要建索引的情况：频繁作为查询条件的字段</p>
+<p>​                                  查询中与其它表关联的字段，外键关系建立索引</p>
+<p>​                                  排序的字段</p>
+<p>​                                  分组的字段</p>
+<p>不需要建索引的情况：表记录太少</p>
+<p>​                                       经常增删改的表</p>
+<p>​                                      有很多重复内容的列（索引的选择性越接近于1，效率越高）</p>
+<h4 id="5-性能分析的explain（查询执行计划）："><a href="#5-性能分析的explain（查询执行计划）：" class="headerlink" title="5.性能分析的explain（查询执行计划）："></a>5.性能分析的<strong>explain</strong>（查询执行计划）：</h4><p>使用explain关键字可以模拟优化器质性sql查询语句看，从而知道mysql是如何处理你的sql语句的，分析你的查询语句或是表结构的性能瓶颈。</p>
+<p>用法：explain关键字 + 你的sql</p>
+<p>5.1<strong>能干什么</strong>：1.表的读取顺序    2.数据读取操作的操作类型    3.那些序偶因可以使用   4.那些索引被实际使用    5.表之间的引用    6.每张表有多少行被优化器查询</p>
+<p>5.2<strong>怎么玩</strong>：执行计划包含的信息：<strong><mark>id</mark> | select_type | table | <mark>type</mark> | possible_keys | <mark>key</mark> | key_len | ref | <mark>rows</mark> | <mark>extra</mark></strong></p>
+<p><mark>id</mark>:select查询的序列号，包含一组数字，表示查询中执行select子句或操作表的顺序。三种情况（1.id相同，执行顺序由上至下；2.id不同，如果是子查询（嵌套查询，最里的select先执行），id的序号会递增，id数值越大优先级越高，越先被执行；3.id相同不同，永远是数字大的id先执行，相同的id顺序执行） 衍生 = derived，表可能是衍生表</p>
+<p><mark>select_type</mark>: 1.simple   简单地select查询，查询中不包含子查询或者union</p>
+<p>​                      2.primary   查询中若包含任何复杂的子部分，最外层查询则被标记为</p>
+<p>​                      3.subquery   在select或where列表中包含了子查询</p>
+<p>​                      4.derived   在from列表中包含的子查询被标记为derived，mysql会递归执行这些查询，把结果放在临时表里。</p>
+<p>​                     5.若第二个select出现在union之后，则被标记为union；若union包含在from子句的子查询中，外层select将被标记为：derived</p>
+<p>​                     6.从union表获取结果的select  </p>
+<p><mark>table</mark>:   显示这一行数据是关于那张表的</p>
+<p><mark>type</mark>:   显示查询使用了何种类型，最好到最坏依次是：<strong>system&gt;const&gt;eq_ref&gt;ref&gt;range&gt;index&gt;All</strong>,   最好能达到ref级别</p>
+<p>system：表只有一条记录</p>
+<p>const：表示通过索引依次就找到了，用于比较primary key 或者 unique索引，如将主键置于where列表中</p>
+<p>eq_ref：唯一性索引扫描，对于每个索引键表中<strong>只有一条记录</strong>与之匹配，常见于主键或唯一索引扫描。</p>
+<p>ref：非唯一性索引扫描，返回匹配某个单独值的<strong>所有行</strong>，可能会找到多个符合条件的行，所以他应该数据查找和扫描的混合体</p>
+<p>range：只检索给定范围的行，使用一个索引来选择行。key列显示使用了哪个索引，出现between，&lt;,&gt;,in</p>
+<p>index：index类型值遍历索引树，这通常比all快，因为索引文件通常比数据文件小，如select id from t1，索引对应字段放在select后面</p>
+<p>all：扫描全表</p>
+<p><mark>possible_keys</mark>: 显示可能应用到这张表中的索引，一个或多个。查询涉及到的字段上若存在索引，则该索引将被列出</p>
+<p><mark>key</mark>:   实际使用的索引，如果为null，则没有使用索引，查询中若使用了覆盖索引，则该索引仅出现在key列表中</p>
+<p>可能出现possible_keys为null，而key不为null的情况，这时出现了覆盖索引，因为select后面的字段刚好与定义的复合索引吻合，<strong>覆盖索引的定义是直接查询索引数据结构获取数据</strong></p>
+<p><mark>key_len</mark>:   表示索引使用的字节数，可通过该列计算查询中使用的索引的长度。显示的值为索引字段的最大可能长度，并非实际使用长度。</p>
+<p><mark>ref</mark>:   显示索引的哪一列被使用了，如果可能的话，是一个常数，哪些列或常量被用来查找索引列上的值。如t1.key = t2.key and t1.key=”const”。这里的t2.key,const</p>
+<p><mark>rows</mark>:   根据表统计信息及索引选用情况，<strong>大致估算出找到所需的记录所需要读取的行数</strong></p>
+<p><mark>extra</mark>:   包含十分重要的额外信息：<strong>1.Using filesort</strong>:   说明mysql会对数据使用一个外部的索引排序，而不是按照表内的索引排序，称为文件排序。例如：复合索引中，之使用到了其中的部分字段，无法通过索引排序，就会使用文件排序，这样会降低效率</p>
+<p><strong>2.Using temporary:</strong>   使用了临时表保存中间结果，常见于order by 和 group by。如group by一定要与索引的个数与顺序</p>
+<p><strong>3.using index:</strong>   表示相应的select操作中使用了<strong>覆盖索引</strong>，避免访问了表的数据行，从索引文件中读取的数据，<strong>效率不错</strong>。如果同时出现using where，表明索引被用来执行索引键值的查找；没有是表明用来读取数据而非执行查找动作。</p>
+<p>4.using join buffer：使用了连接缓存</p>
+<p>5.impossible where：where子句值总是false</p>
+<h4 id="6-索引优化"><a href="#6-索引优化" class="headerlink" title="6.索引优化"></a>6.索引优化</h4><p><strong>索引分析</strong>：</p>
+<p>​       单表：select id,authord_id,from article where category_id = 1 and comments &gt; 1 order by views desc         若建立category_id，comments ，views 的复合索引，虽解决了type为all的问题，但会造成索引失效，使用了文件排序。因为comments处于中间位置，且&gt;1的条件是一个范围值，要commets排好序且匹配后才排comments，所以造成了views的部分排序失效  。解决只需建立ategory_id，views的复合索引就行了</p>
+<p>​       双表：select * from class left join book on class.card = book.card , 索引加在class表，或book表示不一样的。 因为left join 表示左表一定都保留，那么就需要从右表进行搜索。所以建在右表的字段上。</p>
+<p>​      三表：与双表的逻辑相同</p>
+<p>​     <strong>永远用小结果驱动大的结果集</strong>，<strong>优先优化括号内的查询语句，保证join条件字段已经被索引</strong>。</p>
+<p><strong>索引失效(避免)</strong>：1.<strong>最好全值匹配</strong>     2.<strong>最佳左前缀法则</strong>（如果索引了多列，那么必须要从左边开始进行字段的添加，因为复合索引中字段是有顺序的）    3. <strong>不在索引裂伤做任何操作</strong>，会导致索引的失效    4.<strong>存储引擎不能使用索引中范围条件右边的列</strong>（索引中右边的列使用了范围&gt;,&lt;等等会使整个索引失效，type变成range）   5.<strong>尽量使用覆盖索引</strong> ，减少select*    6.mysql在<strong>使用!=</strong> 的时候无法使用索引会导致全表扫描    7.<strong>is null,is not null</strong> 也无法使用索引     8.<strong>like以通配符开头</strong>索引会失效标称全表扫描的操作（只有’字符串%’不会失效，如何解决需要’%字符串%’的情况呢？答案是使用覆盖索引，覆盖索引只需要select后面的字段是定义的索引中的部分或全部排好序）    9.<strong>字符串不加单引号</strong>索引失效 （能查出来）     10.<strong>少用or</strong>，连接是会索引失效 </p>
+<p><img src="/images/mysql%E9%AB%98%E7%BA%A7%E7%AE%80%E8%BF%B0/1.png" alt="总结">-</p>
+<p>group by 基本上都需要进行排序，会有临时表产生 </p>
+<h4 id="7-查询截取分析"><a href="#7-查询截取分析" class="headerlink" title="7.查询截取分析"></a>7.查询截取分析</h4><p>7.1永远小表驱动大表</p>
+<p>7.2 order by 优化 ，mysql支持两种方式的排序，filesort和index，index效率高，它指mysql扫描索引本身完成排序，filesort方式效率较低</p>
+<p>7.3 group by 优化，实质是先排序后进行分组，遵照索引建的最佳左前缀</p>
+<p>7.4 慢查询日志，就是将超过设定的最长时间的sql记录到日志当中，便于分析。开启语句是set global </p>
+<p>slow_query_log = 1。只对当前数据库本次见效。要永久生效需要修改配置文件，但不建议开启。默认情况下long_query_time的值是10秒。</p>
+<p>  另外还有mysqldumpslow日志查询工具进行查询抓取</p>
+<p>7.5  show profile（比explain更加细致），是mysql提供可以用来分析当前会话中语句执行的资源消耗情况，可以用于sql的调优的测量。默认是关闭的，使用需要开启，使用show profile查询select后，再诊断sql，如命令：show profile cpu,block io for query sql的id</p>
+<p>7.6全局查询日志，之后的sql会被记录到general_log里，使用select * from mysql.general_log查看</p>
+<h4 id="8-mysql锁机制"><a href="#8-mysql锁机制" class="headerlink" title="8.mysql锁机制"></a>8.mysql锁机制</h4><p><a href="https://www.cnblogs.com/itdragon/p/8194622.html" target="_blank" rel="noopener">相关文章</a></p>
+<p>​         表锁（偏读）：lock table 表名 read;/write;   <strong>分析表锁定</strong>show status like ‘table%’。<strong>Myisam 的读写锁调度是写优先，因为写锁后，其他线程不能做任何操作，大量的更新回事查询很难得到锁，从而造成永远阻塞。</strong>加锁的方式：自动加锁。查询操作（SELECT），会自动给涉及的所有表加读锁，更新操作（UPDATE、DELETE、INSERT），会自动给涉及的表加写锁。也可以显示加锁：</p>
+<p>共享读锁：lock table tableName read;<br>独占写锁：lock table tableName write;</p>
+<p>​        行锁（偏写）：可以在set auto_commit = 0 后，操作同一行，之后的sql会被阻塞，直到另一语句被手动提交后才会解除阻塞<mark>InnoDB只有在通过索引条件检索数据时使用行级锁</mark>,否则变成使用表锁。加锁的方式：自动加锁。对于UPDATE、DELETE和INSERT语句，InnoDB会自动给涉及数据集加排他锁；对于普通SELECT语句，InnoDB不会加任何锁；当然我们也可以显示的加锁：<br>共享锁：select * from tableName where … + lock in share more<br>排他锁：select * from tableName where … + for update</p>
+<p><strong>索引失效会导致行锁变成表锁</strong></p>
+<p>间隙锁（在条件范围内但不存在的记录）也会导致阻塞</p>
+<p>select xxx <strong>for update</strong>锁定某一行后，其它的操作会被阻塞，直到锁定行的会话commit</p>
+<p><strong>分析行锁定</strong> show status like ‘innodb_row_lock%’：Innodb_row_lock_time_avg(等待平均时长),</p>
+<p>Innodb_row_lock_waits(等待总次数)，Innodb_row_lock_time(等待总时长) 这三项</p>
+<h4 id="9-mysql主从复制"><a href="#9-mysql主从复制" class="headerlink" title="9.mysql主从复制"></a>9.mysql主从复制</h4>
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/images/weixin.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">架构</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">mysql</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/08/20/mysql高级简述/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2019/08/18/java新特性/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">java新特性</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
+  <div id="gitment-ctn"></div> 
+<link rel="stylesheet" href="//imsun.github.io/gitment/style/default.css"> 
+<script src="//imsun.github.io/gitment/dist/gitment.browser.js"></script>
+
+<script>
+var gitment = new Gitment({
+  id: "http://yoursite.com/2019/08/20/mysql高级简述/",
+  owner: 'JiaFeiLee',
+  repo: 'https://github.com/JiaFeiLee/JiaFeiLee.github.io',
+  oauth: {
+    client_id: '51c5c9a5b66ebf689a36',
+    client_secret: '0dcad1ba2cdaf26b0906a54a37e7cef9359eefa6',
+  },
+})
+gitment.render('gitment-ctn')
+</script>
+  
 
 
           </div>
@@ -235,9 +467,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: true,
 		toc_hide_index: true,

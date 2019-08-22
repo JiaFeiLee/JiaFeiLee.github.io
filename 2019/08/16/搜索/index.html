@@ -6,18 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: 架构 | Hexo</title>
+  <title>搜索 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="java springboot">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/tags/架构/index.html">
+  <meta name="description" content="1.岛屿数量">
+<meta name="keywords" content="算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="搜索">
+<meta property="og:url" content="http://yoursite.com/2019/08/16/搜索/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="java springboot">
+<meta property="og:description" content="1.岛屿数量">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-08-17T08:00:11.450Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
-<meta name="twitter:description" content="java springboot">
+<meta name="twitter:title" content="搜索">
+<meta name="twitter:description" content="1.岛屿数量">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -157,60 +159,224 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-搜索" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/02/单点登录/" class="archive-article-date">
-  	<time datetime="2019-08-02T02:49:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-02</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/02/单点登录/">单点登录</a>
+    <h1 class="article-title" itemprop="name">
+      搜索
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/08/16/搜索/" class="archive-article-date">
+  	<time datetime="2019-08-16T12:10:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="1-岛屿数量"><a href="#1-岛屿数量" class="headerlink" title="1.岛屿数量"></a>1.岛屿数量</h4><a id="more"></a>
+
+<p><a href="https://leetcode-cn.com/problems/number-of-islands/" target="_blank" rel="noopener">力扣连接</a></p>
+<p>给定一个由 ‘1’（陆地）和 ‘0’（水）组成的的二维网格，计算岛屿的数量。一个岛被水包围，并且它是通过水平方向或垂直方向上相邻的陆地连接而成的。你可以假设网格的四个边均被水包围。</p>
+<p>思路：可以使用深度搜索或者是广度搜索。要记忆搜索过的位置，需要定义一个标记数据。或者是不标记查询过的位置，官方的做法直接将正在查询的陆地变成水.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="comment">//使用深度搜索遍历</span></span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">char</span>[][] grid, <span class="keyword">int</span> r, <span class="keyword">int</span> c)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> nr = grid.length;</span><br><span class="line">    <span class="keyword">int</span> nc = grid[<span class="number">0</span>].length;</span><br><span class="line">    <span class="comment">//边界或为0</span></span><br><span class="line">    <span class="keyword">if</span> (r &lt; <span class="number">0</span> || c &lt; <span class="number">0</span> || r &gt;= nr || c &gt;= nc || grid[r][c] == <span class="string">'0'</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//变成0</span></span><br><span class="line">    grid[r][c] = <span class="string">'0'</span>;</span><br><span class="line">    dfs(grid, r - <span class="number">1</span>, c);</span><br><span class="line">    dfs(grid, r + <span class="number">1</span>, c);</span><br><span class="line">    dfs(grid, r, c - <span class="number">1</span>);</span><br><span class="line">    dfs(grid, r, c + <span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">numIslands</span><span class="params">(<span class="keyword">char</span>[][] grid)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (grid == <span class="keyword">null</span> || grid.length == <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> nr = grid.length;</span><br><span class="line">    <span class="keyword">int</span> nc = grid[<span class="number">0</span>].length;</span><br><span class="line">    <span class="keyword">int</span> num_islands = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> r = <span class="number">0</span>; r &lt; nr; ++r) &#123;</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">int</span> c = <span class="number">0</span>; c &lt; nc; ++c) &#123;</span><br><span class="line">        <span class="keyword">if</span> (grid[r][c] == <span class="string">'1'</span>) &#123;</span><br><span class="line">          ++num_islands; <span class="comment">// 一次遍历加一</span></span><br><span class="line">          dfs(grid, r, c);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> num_islands;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-单词接龙"><a href="#2-单词接龙" class="headerlink" title="2.单词接龙"></a>2.单词接龙</h4><p><a href="https://leetcode-cn.com/problems/word-ladder/" target="_blank" rel="noopener">力扣连接</a></p>
+<p>给定两个单词（beginWord 和 endWord）和一个字典，找到从 beginWord 到 endWord 的最短转换序列的长度。转换需遵循如下规则：</p>
+<p>每次转换只能改变一个字母。<br>转换过程中的中间单词必须是字典中的单词。(endWord也 必须要是字典中)</p>
+<p>说明:</p>
+<p>如果不存在这样的转换序列，返回 0。<br>所有单词具有相同的长度。<br>所有单词只由小写字母组成。<br>字典中不存在重复的单词。<br>你可以假设 beginWord 和 endWord 是非空的，且二者不相同。</p>
+<p>思路：将单词接龙看成图，可以进行转换的字符串等于有线连接。利用广度搜索找寻最短路径。构建图可以先根据字典得到每个通用状态对应的单词集合，就相当于得到了当前单词的邻接点。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> javafx.util.Pair;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">ladderLength</span><span class="params">(String beginWord, String endWord, List&lt;String&gt; wordList)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> L = beginWord.length();</span><br><span class="line">    <span class="comment">//每种通用状态对应的具体的单词（如&#123;d*g:[dog,dag]）</span></span><br><span class="line">    HashMap&lt;String, ArrayList&lt;String&gt;&gt; allComboDict = <span class="keyword">new</span> HashMap&lt;String, ArrayList&lt;String&gt;&gt;();</span><br><span class="line"> </span><br><span class="line">    wordList.forEach(+</span><br><span class="line">        word -&gt; &#123;</span><br><span class="line">          <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; L; i++) &#123;</span><br><span class="line"></span><br><span class="line">            String newWord = word.substring(<span class="number">0</span>, i) + <span class="string">'*'</span> + word.substring(i + <span class="number">1</span>, L);</span><br><span class="line">            ArrayList&lt;String&gt; transformations =</span><br><span class="line">                allComboDict.getOrDefault(newWord, <span class="keyword">new</span> ArrayList&lt;String&gt;());</span><br><span class="line">            transformations.add(word);</span><br><span class="line">            allComboDict.put(newWord, transformations);</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Queue for BFS </span></span><br><span class="line">      <span class="comment">//Pair相当于一个键值对</span></span><br><span class="line">    Queue&lt;Pair&lt;String, Integer&gt;&gt; Q = <span class="keyword">new</span> LinkedList&lt;Pair&lt;String, Integer&gt;&gt;();</span><br><span class="line">    Q.add(<span class="keyword">new</span> Pair(beginWord, <span class="number">1</span>));</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 每个单词记号</span></span><br><span class="line">    HashMap&lt;String, Boolean&gt; visited = <span class="keyword">new</span> HashMap&lt;String, Boolean&gt;();</span><br><span class="line">    visited.put(beginWord, <span class="keyword">true</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//广度搜索中使用队列</span></span><br><span class="line">    <span class="keyword">while</span> (!Q.isEmpty()) &#123;</span><br><span class="line">      Pair&lt;String, Integer&gt; node = Q.remove();</span><br><span class="line">      String word = node.getKey();</span><br><span class="line">      <span class="keyword">int</span> level = node.getValue();</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; L; i++) &#123;   <span class="comment">//遍历单词的长度</span></span><br><span class="line"></span><br><span class="line">      <span class="comment">//获取当前单词的通用转态中的一种</span></span><br><span class="line">        String newWord = word.substring(<span class="number">0</span>, i) + <span class="string">'*'</span> + word.substring(i + <span class="number">1</span>, L);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//获取邻接字符串</span></span><br><span class="line">        <span class="keyword">for</span> (String adjacentWord : allComboDict.getOrDefault(newWord, <span class="keyword">new</span> ArrayList&lt;String&gt;())) &#123;</span><br><span class="line">          <span class="comment">//每次与目标字符串进行比较，相等则返回结果</span></span><br><span class="line">          <span class="keyword">if</span> (adjacentWord.equals(endWord)) &#123;</span><br><span class="line">            <span class="keyword">return</span> level + <span class="number">1</span>;</span><br><span class="line">          &#125;</span><br><span class="line">          <span class="comment">//邻接字符串是否使用过，相当于图中一个节点对应的多分支，没有就进队。</span></span><br><span class="line">          <span class="keyword">if</span> (!visited.containsKey(adjacentWord)) &#123;</span><br><span class="line">            visited.put(adjacentWord, <span class="keyword">true</span>);</span><br><span class="line">            Q.add(<span class="keyword">new</span> Pair(adjacentWord, level + <span class="number">1</span>));</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-火柴拼正方形"><a href="#3-火柴拼正方形" class="headerlink" title="3.火柴拼正方形"></a>3.火柴拼正方形</h4><p><a href="https://leetcode-cn.com/problems/matchsticks-to-square/" target="_blank" rel="noopener">力扣链接</a></p>
+<p>还记得童话《卖火柴的小女孩》吗？现在，你知道小女孩有多少根火柴，请找出一种能使用所有火柴拼成一个正方形的方法。不能折断火柴，可以把火柴连接起来，并且每根火柴都要用到。</p>
+<p>输入为小女孩拥有火柴的数目，每根火柴用其长度表示。输出即为是否能用所有的火柴拼成正方形。</p>
+<p>思路：利用<strong>回溯加深度搜索</strong>，遍历四条边，添加一根火柴，再深度搜索该种情况有没有拼接成功的机会。若中间搜索到底不可能成功就回溯撤掉添加的火柴。 </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">makesquare</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//数量小于4</span></span><br><span class="line">        <span class="keyword">if</span> (nums.length &lt; <span class="number">4</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//总和不是4的倍数</span></span><br><span class="line">        Integer sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">            sum += nums[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (sum % <span class="number">4</span> != <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//从大到小进行排序</span></span><br><span class="line">        Comparator&lt;Integer&gt; cmp = <span class="keyword">new</span> Comparator&lt;Integer&gt;() &#123;</span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(Integer i1, Integer i2)</span> </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> i2-i1;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">        Integer[] str = <span class="keyword">new</span> Integer[nums.length];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">            str[i] = nums[i];</span><br><span class="line">        &#125;</span><br><span class="line">        Arrays.sort(str, cmp);</span><br><span class="line">        <span class="keyword">int</span>[] bucket = &#123;<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>&#125;;   <span class="comment">//四个边相当于桶</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> generate(<span class="number">0</span>, nums, sum/<span class="number">4</span>, bucket);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">generate</span><span class="params">(<span class="keyword">int</span> i, Integer[] nums, <span class="keyword">int</span> target, <span class="keyword">int</span>[] bucket)</span> </span>&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//所有火柴遍历完</span></span><br><span class="line">        <span class="keyword">if</span> (i &gt;= nums.length) &#123;</span><br><span class="line">            <span class="keyword">return</span> bucket[<span class="number">0</span>] == target &amp;&amp; bucket[<span class="number">1</span>] == target &amp;&amp; bucket[<span class="number">2</span>] == target</span><br><span class="line">                &amp;&amp; bucket[<span class="number">3</span>] ==target;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">4</span>; j++) &#123;  </span><br><span class="line">            <span class="keyword">if</span> (bucket[<span class="number">0</span>] + nums[i] &gt; target) &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            bucket[j] += nums[i];</span><br><span class="line">            <span class="keyword">if</span> (generate(i + <span class="number">1</span>, nums, target, bucket)) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//当上面的不为真时，说明该种情况的方法不成功，应该将该木棍从桶中拿出来</span></span><br><span class="line">            bucket[j] -= nums[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>ps：还有错误，需要改正</p>
+<h4 id="单词接龙"><a href="#单词接龙" class="headerlink" title=".单词接龙||"></a>.单词接龙||</h4><p><a href="https://leetcode-cn.com/problems/word-ladder-ii/" target="_blank" rel="noopener">力扣链接</a></p>
+<p>给定两个单词（beginWord 和 endWord）和一个字典 wordList，找出所有从 beginWord 到 endWord 的最短转换序列。转换需遵循如下规则：</p>
+<p>每次转换只能改变一个字母。<br>转换过程中的中间单词必须是字典中的单词。</p>
+<p>说明:</p>
+<p>如果不存在这样的转换序列，返回一个空列表。<br>所有单词具有相同的长度。<br>所有单词只由小写字母组成。<br>字典中不存在重复的单词。<br>你可以假设 beginWord 和 endWord 是非空的，且二者不相同。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/images/weixin.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">架构</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/08/16/搜索/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2019/08/18/java新特性/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          java新特性
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2019/08/11/netty学习/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">netty学习</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
+  <div id="gitment-ctn"></div> 
+<link rel="stylesheet" href="//imsun.github.io/gitment/style/default.css"> 
+<script src="//imsun.github.io/gitment/dist/gitment.browser.js"></script>
+
+<script>
+var gitment = new Gitment({
+  id: "http://yoursite.com/2019/08/16/搜索/",
+  owner: 'JiaFeiLee',
+  repo: 'https://github.com/JiaFeiLee/JiaFeiLee.github.io',
+  oauth: {
+    client_id: '51c5c9a5b66ebf689a36',
+    client_secret: '0dcad1ba2cdaf26b0906a54a37e7cef9359eefa6',
+  },
+})
+gitment.render('gitment-ctn')
+</script>
+  
 
 
           </div>
@@ -235,9 +401,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: true,
 		toc_hide_index: true,

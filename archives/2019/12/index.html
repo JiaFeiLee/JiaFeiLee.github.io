@@ -6,20 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>RabbitMQ | Hexo</title>
+  <title>Archives: 2019/12 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="RabbitMQ基础概念">
-<meta name="keywords" content="RabbitMQ">
-<meta property="og:type" content="article">
-<meta property="og:title" content="RabbitMQ">
-<meta property="og:url" content="http://yoursite.com/2019/07/09/RabbitMQ/index.html">
+  <meta name="description" content="java springboot">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/archives/2019/12/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="RabbitMQ基础概念">
+<meta property="og:description" content="java springboot">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-07-17T01:32:08.544Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="RabbitMQ">
-<meta name="twitter:description" content="RabbitMQ基础概念">
+<meta name="twitter:title" content="Hexo">
+<meta name="twitter:description" content="java springboot">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -159,231 +157,60 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-RabbitMQ" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      RabbitMQ
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2019" class="archive-year">2019</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2019/12/15/虚拟机网络电缆被拔出/" class="archive-article-date">
+  	<time datetime="2019-12-15T05:28:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-15</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2019/12/15/虚拟机网络电缆被拔出/">虚拟机网络电缆被拔出</a>
     </h1>
   
 
-        
-        <a href="/2019/07/09/RabbitMQ/" class="archive-article-date">
-  	<time datetime="2019-07-09T07:40:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="RabbitMQ基础概念"><a href="#RabbitMQ基础概念" class="headerlink" title="RabbitMQ基础概念"></a>RabbitMQ基础概念</h2><a id="more"></a>
-
-<p>​          消息服务擅长于解决多系统，异构系统间的数据交换问题，也可以把它用于系统间服务的相互调用。消息中间件事消息传输过程中<strong>保存消息的容器</strong>。队列的主要目的是<strong>提供路由并保证消息的传递</strong>；如果发送消息是接收者不可用，<strong>消息队列会保留消息</strong>，直到可以成功传递它为止，<strong>消息队列保存消息也是有期限的。</strong></p>
-<h2 id="消息中间件的特点"><a href="#消息中间件的特点" class="headerlink" title="消息中间件的特点"></a>消息中间件的特点</h2><p>​        1. 采用<strong>异步</strong>处理模式：发送一个消息而无须等待响应，接收者无须对消息发送者做出同步回应，整个过程是异步的</p>
-<p>​        2. 应用程序和应用程序调用关系为松耦合关系</p>
-<p>​                            <strong>发送者和接收者不必了解对方，只需要确认消息</strong></p>
-<p>​                            <strong>发送者和接收者不必同时在线</strong></p>
-<h2 id="RabbitMQ简介"><a href="#RabbitMQ简介" class="headerlink" title="RabbitMQ简介"></a>RabbitMQ简介</h2><p>​          消息队列是应用程序和应用程序之间的通信方法。AMQP是一个高级消息队列协议，使用Erlang面向并发语言开发的，支持主流的操作系统，</p>
-<h2 id="消息中间件传递模型"><a href="#消息中间件传递模型" class="headerlink" title="消息中间件传递模型"></a>消息中间件传递模型</h2><ol>
-<li><p><mark>点对点模型</mark>：用于消息生产者和消息消费者之间点到点的通信。消息发送到某个特定表示的特定消费者，名字对应的是一个队列，发送给消费者之前放在队列中</p>
-<p>​                   每个消息只有一个消费者</p>
-<p>​                   发送者和接收者没有时间依赖</p>
-<p>​                   接收者确认消息接收</p>
-</li>
-<li><p><mark>发布-订阅模型</mark>：发布者和订阅者彼此不知道对方，好比是匿名公告板，发布者需要建立一个订阅，以便消费者订阅</p>
-<p>​                  每个消息可以有多个订阅者</p>
-<p>​                  客户端只有订阅后才能接收到消息</p>
-<p>​                  持久订阅和非持久订阅</p>
-<p>​                  </p>
-</li>
-</ol>
-
-      
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你的赞赏<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="/images/weixin.jpg">
-                      <span class="reward-type">微信</span>
-                    </div>
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">RabbitMQ</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">虚拟机</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/07/09/RabbitMQ/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2019/07/09/springboot-消息/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          springboot-消息
-        
-      </div>
-    </a>
   
   
-    <a href="/2019/07/08/springboot-docker/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">springboot-docker</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-        <div class="toc-container tooltip-left">
-            <i class="icon-font icon-category"></i>
-            <div class="tooltip tooltip-east">
-                <span class="tooltip-item">
-                </span>
-                <span class="tooltip-content">
-                    <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#RabbitMQ基础概念"><span class="toc-number">1.</span> <span class="toc-text">RabbitMQ基础概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#消息中间件的特点"><span class="toc-number">2.</span> <span class="toc-text">消息中间件的特点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RabbitMQ简介"><span class="toc-number">3.</span> <span class="toc-text">RabbitMQ简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#消息中间件传递模型"><span class="toc-number">4.</span> <span class="toc-text">消息中间件传递模型</span></a></li></ol>
-                    </div>
-                </span>
-            </div>
-        </div>
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-
-  
-
-  
-  <div id="gitment-ctn"></div> 
-<link rel="stylesheet" href="//imsun.github.io/gitment/style/default.css"> 
-<script src="//imsun.github.io/gitment/dist/gitment.browser.js"></script>
-
-<script>
-var gitment = new Gitment({
-  id: "http://yoursite.com/2019/07/09/RabbitMQ/",
-  owner: 'JiaFeiLee',
-  repo: 'https://github.com/JiaFeiLee/JiaFeiLee.github.io',
-  oauth: {
-    client_id: '51c5c9a5b66ebf689a36',
-    client_secret: '0dcad1ba2cdaf26b0906a54a37e7cef9359eefa6',
-  },
-})
-gitment.render('gitment-ctn')
-</script>
-  
+    
 
 
           </div>
@@ -408,8 +235,8 @@ gitment.render('gitment-ctn')
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
-		isArchive: false,
+		isPost: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,
